@@ -29,7 +29,10 @@ wire BWrite;
 wire ResetPC;
 wire ResetA;
 wire ResetB;
+wire EPCWrite;
 wire ResetEPC;
+wire CauseWrite; //error wire
+wire IntCause; //
 wire [1:0] AluSrcB;
 wire [5:0] WOP;
 wire [4:0] WRS;
@@ -54,7 +57,7 @@ wire [4:0] W15_0;
 
 Control control (Clock, Reset, WOP, W31_26, PCWrite, IorD, MemRead. MemWrite, MemtoReg, IRWrite, 
 
-Registrador RA (Clock, ResetA, SetA, WAI, WA);
-Registrador RB (Clock, ResetB, SetB, WBI, WB);
+Registrador RA (Clock, ResetA, AWrite, WAI, WA);
+Registrador RB (Clock, ResetB, BWrite, WBI, WB);
 
 endmodule
