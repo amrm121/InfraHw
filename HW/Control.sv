@@ -52,8 +52,10 @@ module Control(clk, Reset, OP, Funct, PCWrite, IorD, MemRead, MemWrite, MemtoReg
     parameter SA_A = 1'b1;
     
     //ALUSrcB
-    parameter SB_4 = 1'b0; //PC+4
-    parameter SB_B = 1'b1;
+    parameter SB_4 = 2'b00; //PC+4
+    parameter SB_B = 2'b01;
+    parameter SB_SL2 = 2'b10; 
+    parameter SB_SE = 2'b11;
     
     //Estados
 	parameter RESET = 0;
@@ -61,15 +63,23 @@ module Control(clk, Reset, OP, Funct, PCWrite, IorD, MemRead, MemWrite, MemtoReg
 	parameter IDLE = 2;
 	parameter INSTR_DECODE = 3;
 	parameter PC_WRT = 4;
-	parameter OP_NFOUND = 5;
-	parameter STOP_PC = 6;
-	parameter MEM_WRITE = 7;
+	parameter STOP_PC = 5;
+	parameter MEM_WRITE = 6;
+	parameter IDLE_MEMORY = 7;
+	parameter OP_NFOUND = 8;
+	parameter RTYPE = 9;
+	parameter BEQ = 10;
+	parameter BNE = 11;
+	parameter LW = 12;
+	parameter SW = 13;
+	parameter LUI = 14;
+	parameter J = 15;
 	
 	//ALU
 	parameter ALU_LOAD = 0;
 	parameter ALU_ADD = 1;
 	parameter ALU_SUB = 2;
-	parameter ALU_ABD = 3;
+	parameter ALU_AND = 3;
 	parameter ALU_I = 4;
 	parameter ALU_NOT = 5;
 	parameter ALU_XOR = 6;
@@ -91,9 +101,9 @@ module Control(clk, Reset, OP, Funct, PCWrite, IorD, MemRead, MemWrite, MemtoReg
 always @ (negedge clk) begin
     StateAux <= st;
     
-    begin case(state)
+    case(st)
     
-		RESET: begin
+		RESET: begin 
 		
 		ResetPC <= CLEAR;
 		ResetA <= CLEAR;
@@ -113,5 +123,65 @@ always @ (negedge clk) begin
 		
 		MemRead <= READ;
 		ALUSrcA <= SA_PC;
-		ALUSrcB <= SB_4;sssss
+		ALUSrcB <= SB_4;
+		ALUOp <= ALU_ADD;
+		PCWrite <= LOAD;
+		IorD <= ID_PC;
 		
+		st <= IDLE;
+		end
+		
+		IDLE: begin
+		
+		IRWrite <= LOAD;
+		PCWrite <= N_LOAD;
+		
+		st <= ISNTR_DECODE;
+		end
+		
+		INSTR_DECODE: begin
+		
+		IRWrite <= N_LOAD;
+		ALUSrcA <= SA_PC;
+		ALUSrcB <= SB_SL2;
+		RegWrite <= N_LOAD;
+		ALUOp <= ALU_ADD;
+		AWrite <= LOAD;
+		BWrite <= LOAD;
+		case(OP)
+			OP_BEQ: begin
+				state <= BEQ;
+			end
+			
+			OP_R: begin
+				case(Funct)
+				6'h20: begin
+					state <= ADD;
+				end
+				6'h24 begin
+					state <= AND;
+				end
+				6'h22 begin
+					state <= SUB;
+				end
+				6'h26 begin
+					state <= XOR;
+				end
+				6'hd begin
+					state <= BREAK;
+				end
+				6'h0 begin
+					state <= NOP;
+				end
+			endcase
+			end
+			
+			default: begin
+				state <= OP_NFOUND;
+			end
+			endcase
+			
+		end
+		
+end
+endmodule
