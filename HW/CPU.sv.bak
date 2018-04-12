@@ -17,7 +17,23 @@ output wire [31:0] SaidaMem;
 wire PCWrite;
 wire IorD;
 wire MemRead;
-wire [1:0] AluSrcA;
-wire [2:0] AluSrcB;
+wire IRWrite;
+wire AluSrcA;
+wire [1:0] AluSrcB;
+wire [5:0] WOP;
+wire [4:0] WRS;
+wire [4:0] WRT;
+wire [31:0] WRD;
+wire [15:0] WIMMED;
+wire [31:0] WPC;
+wire [31:0] WA;
+wire [31:0] WAI;
+wire [31:0] WB;
+wire [31:0] WBI;
+wire [31:0] WMemIn;
+wire [31:0] WMemOut;
+wire [31:0] WSL2;
+
+
 
 endmodule

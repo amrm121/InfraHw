@@ -6,7 +6,7 @@ module Control(clk, Reset, OP, Funct, PCWrite, IorD, MemRead, MemWrite, MemtoReg
 	input [5:0] Funct;
 	
 
-	output reg [0:5] StateAux; //estado auxiliar
+	output reg [5:0] StateAux; //estado auxiliar
 	output reg PCWrite;
 	output reg IorD;
 	output reg MemRead; 
@@ -21,7 +21,7 @@ module Control(clk, Reset, OP, Funct, PCWrite, IorD, MemRead, MemWrite, MemtoReg
 	output reg [1:0] PCSource;
 	output reg [2:0] ALUOp;
 	output reg ALUSrcA;
-	output reg ALUSrcB;
+	output reg [1:0] ALUSrcB;
 	output reg RegWrite;
 	output reg RegDst;
 	output reg ResetPC;
@@ -74,6 +74,13 @@ module Control(clk, Reset, OP, Funct, PCWrite, IorD, MemRead, MemWrite, MemtoReg
 	parameter SW = 13;
 	parameter LUI = 14;
 	parameter J = 15;
+	parameter ADD = 16;
+	parameter AND = 17;
+	parameter SUB = 18;
+	parameter XOR = 19;
+	parameter BREAK = 20;
+	parameter NOP = 21;
+	
 	
 	//ALU
 	parameter ALU_LOAD = 0;
@@ -136,7 +143,7 @@ always @ (negedge clk) begin
 		IRWrite <= LOAD;
 		PCWrite <= N_LOAD;
 		
-		st <= ISNTR_DECODE;
+		st <= INSTR_DECODE;
 		end
 		
 		INSTR_DECODE: begin
@@ -150,34 +157,34 @@ always @ (negedge clk) begin
 		BWrite <= LOAD;
 		case(OP)
 			OP_BEQ: begin
-				state <= BEQ;
+				st <= BEQ;
 			end
 			
 			OP_R: begin
 				case(Funct)
 				6'h20: begin
-					state <= ADD;
+					st <= ADD;
 				end
 				6'h24: begin
-					state <= AND;
+					st <= AND;
 				end
 				6'h22: begin
-					state <= SUB;
+					st <= SUB;
 				end
 				6'h26: begin
-					state <= XOR;
+					st <= XOR;
 				end
 				6'hd: begin
-					state <= BREAK;
+					st <= BREAK;
 				end
 				6'h0: begin
-					state <= NOP;
+					st <= NOP;
 				end
 				endcase
 			end
 			
 			default: begin
-				state <= OP_NFOUND;
+				st <= OP_NFOUND;
 			end
 			endcase
 			end
