@@ -1,19 +1,23 @@
-module CPU (Clock, Reset, Estado, SaidaPC, SaidaA, SaidaB, SaidaALU, Reg1, Reg2, entrada, funct, EntradaMem, SaidaMem);
+module CPU (Clock, Reset, Estado, SaidaPC, SIR31_26 , SaidaA, SaidaB, SaidaALU, SaidaALUOut, Reg1, Reg2, SaET, entrada, funct, EntradaMem, SaidaMem, EPCOut);
 
 input Clock;
 input Reset;
 
+output wire SaET;
 output wire [5:0] Estado;
+output wire [5:0] SIR31_26;
+output wire [5:0] funct;
 output wire [31:0] SaidaPC;
 output wire [31:0] SaidaA;  
 output wire [31:0] SaidaB;
 output wire [31:0] SaidaALU;
+output wire [31:0] SaidaALUOut;
 output wire [31:0] Reg1;
 output wire [31:0] Reg2;
 output wire [31:0] entrada;
-output wire [5:0] funct;
 output wire [31:0] EntradaMem;
 output wire [31:0] SaidaMem;
+output wire [31:0] EPCOut;
 
 wire PCWrite;
 wire IorD;

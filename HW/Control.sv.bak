@@ -74,6 +74,13 @@ module Control(clk, Reset, OP, Funct, PCWrite, IorD, MemRead, MemWrite, MemtoReg
 	parameter SW = 13;
 	parameter LUI = 14;
 	parameter J = 15;
+	parameter ADD = 16;
+	parameter AND = 17;
+	parameter SUB = 18;
+	parameter XOR = 19;
+	parameter BREAK = 20;
+	parameter NOP = 21;
+	
 	
 	//ALU
 	parameter ALU_LOAD = 0;

@@ -1,9 +1,12 @@
-module Control(clk, Reset, OP, Funct, PCWrite, IorD, MemRead, MemWrite, MemtoReg, IRWrite, CauseWrite, IntCause, EPCWrite, PCSource, ALUOp, ALUSrcB, ALUSrcA, RegWrite, RegDst, AWrite, BWrite, StateAux, ResetPC, ResetA, ResetB, ResetEPC);
+module Control(clk, Reset, OP, Funct, PCWrite, IorD, MemRead, MemWrite, MemtoReg, IRWrite, CauseWrite, GT, EQ, LT, MuxR1, MuxR2, IntCause, Shift, EPCWrite, PCSource, ALUOp, ALUOutOp, ALUSrcB, ALUSrcA, RegWrite, RegDst, AWrite, BWrite, StateAux, ResetPC, ResetA, ResetB, ResetEPC);
 
 	input clk;
 	input Reset;
 	input [5:0] OP;
 	input [5:0] Funct;
+	input GT;
+	input EQ;
+	input LT;
 	
 
 	output reg [5:0] StateAux; //estado auxiliar
