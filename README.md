@@ -1,5 +1,5 @@
 
-Error (10161): Verilog HDL error at Control.sv(139): object "ISNTR_DECODE" is not declared
+Error (10161): Verilog HDL error at Control.sv(139): object "ISNTR_DECODE" is not declared \n
 Error (10161): Verilog HDL error at Control.sv(153): object "state" is not declared
 Error (10161): Verilog HDL error at Control.sv(159): object "state" is not declared
 Error (10161): Verilog HDL error at Control.sv(159): object "ADD" is not declared
