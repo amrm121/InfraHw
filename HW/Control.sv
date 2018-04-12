@@ -96,7 +96,7 @@ module Control(clk, Reset, OP, Funct, PCWrite, IorD, MemRead, MemWrite, MemtoReg
     
     initial begin
 		st <= RESET;
-	end;
+	end
 	
 always @ (negedge clk) begin
     StateAux <= st;
@@ -158,30 +158,31 @@ always @ (negedge clk) begin
 				6'h20: begin
 					state <= ADD;
 				end
-				6'h24 begin
+				6'h24: begin
 					state <= AND;
 				end
-				6'h22 begin
+				6'h22: begin
 					state <= SUB;
 				end
-				6'h26 begin
+				6'h26: begin
 					state <= XOR;
 				end
-				6'hd begin
+				6'hd: begin
 					state <= BREAK;
 				end
-				6'h0 begin
+				6'h0: begin
 					state <= NOP;
 				end
-			endcase
+				endcase
 			end
 			
 			default: begin
 				state <= OP_NFOUND;
 			end
 			endcase
-			
-		end
+			end
+		endcase
 		
 end
+
 endmodule
