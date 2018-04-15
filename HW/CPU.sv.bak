@@ -1,4 +1,4 @@
-module CPU (Clock, rst, MemData, Address, WriteDataMem, WriteRegister, WriteDataReg, MDR, Alu, AluOut, PC, Reg_Desloc, wr, RegWrite, IRWrite, EPC, mul_Module, Estado);
+module CPU (Clock, rst, MemData, Address, WriteDataMem, WriteRegister, WriteDataReg, MDR, Alu, AluOut, I25_21, I20_16, RegWrite, PC, Reg_Desloc, iord, wr, IRWrite, EPC, mul_Module, Estado, Areg, Breg, Areg_out, Breg_out, aluop);
 
 input logic Clock;
 input logic rst;
@@ -20,17 +20,39 @@ input logic rst;
 //mul_Module-modulo da multiplicacao
 //Estado-numero do estado que a ControlUnit se encontra
 
-output logic [31:0] MemData, Address, WriteDataMem, WriteDataReg, MDR, Alu, AluOut, PC, Reg_Desloc, EPC, mul_Module, WriteRegister;
-output logic wr, RegWrite, IRWrite;
+output logic [31:0] MemData, 
+					Address, 
+					WriteDataMem, 
+					WriteDataReg, 
+					MDR, 
+					Alu, 
+					AluOut, 
+					PC, 
+					Reg_Desloc, 
+					EPC, 
+					mul_Module, 
+					WriteRegister,
+					Areg, 
+					Breg, 
+					Areg_out, 
+					Breg_out;
+output logic wr, 
+		     RegWrite, 
+		     IRWrite,
+			 iord;
+		     
 output logic [5:0] Estado;
 
+output logic [4:0] I25_21, 
+				   I20_16;
+
 logic [5:0] Opc;
-logic [4:0] I25_21, I20_16;
+
 logic [15:0] I15_0;
 logic [1:0] pcsr, alub;
-logic [2:0] aluop;
-logic [31:0] iordm, Areg, Breg, Areg_out, Breg_out, ALUAin, ALUBin, PCin;
-logic pcwrt, iord, mread, func, WRr, mreg, irwr, alua, rgwrt, rgdst, st, aluoutwr, mdrwt, bwrt, awrt;
+output logic [2:0] aluop;
+logic [31:0] iordm, ALUAin, ALUBin, PCin, signExtended;
+logic pcwrt, mread, func, mreg, alua, rgdst, st, aluoutwr, mdrwt, bwrt, awrt;
 
 
 Control control(.Clk(Clock), 
@@ -38,21 +60,21 @@ Control control(.Clk(Clock),
 				.OP(Opc), 
 				.PCWrite(pcwrt), 
 				.IorD(iord),  
-				.Funct(func), 
-				.wr(WRr), 
+				.Funct({I15_0[5:0]}), 
+				.wr(wr),
 				.MemtoReg(mreg), 
-				.IRWrite(irwr), 
+				.IRWrite_C(IRWrite), 
 				.PCSource(pcsr),
 				.AluOp(aluop),
 				.AluSrcB(alub),
 				.AluSrcA(alua),
-				.RegWrite(rgwrt),
+				.RegWrite_C(RegWrite),
 				.RegDst(rgdst),
 				.State(Estado),
 				.AluOutWrite(aluoutwr),
 				.MDRWrite(mdrwt),
-				.AWrite(awrt),
-				.BWrite(bwrt));
+				.AWrite(AWrite),
+				.BWrite(BWrite));
 
 //Multiplexes
 IorDMux iordmux(.IorD(iord),
@@ -62,7 +84,7 @@ IorDMux iordmux(.IorD(iord),
 			 
 RegDstMux rdmux(.RegDst(rgdst),
 				.I20_16(I20_16),
-				.I15_11(I15_0[15:11]),
+				.I15_11({I15_0[15:11]}),
 				.wrtRegMux_out(WriteRegister));
 
 MDRMux mdrmux(.MemtoReg(mreg),
@@ -71,13 +93,13 @@ MDRMux mdrmux(.MemtoReg(mreg),
 		   	  .MDRMux_out(WriteDataReg));
 
 AluAMux ramux(.AluSrcA(alua),
-			  .A(AReg_out),
+			  .A(Areg_out),
 			  .PC(PC),
 			  .mux_out(ALUAin));
 
 AluBMux rbmux(.AluSrcB(alub),
-			  .B(BReg_out),
-			  .SignE(),
+			  .B(Breg_out),
+			  .SignE(signExtended),
 			  .SL2(),
 			  .mux_out(ALUBin));
 			  
@@ -126,15 +148,15 @@ Registrador AluOutR(.Clk(Clock),
 //Read 0 . Write 1		
 Memoria 	MEM(.Address(Address),
 				.Clock(Clock),
-				.Wr(WRr),
-				.Datain(Breg_out),
+				.Wr(wr),
+				.Datain(),
 				.Dataout(MemData));
 				
 
 				
 Instr_Reg 	IR(.Clk(Clock),
 			   .Reset(rst),
-			   .Load_ir(irwr),
+			   .Load_ir(IRWrite),
 			   .Entrada(MemData),
 			   .Instr31_26(Opc),
 			   .Instr25_21(I25_21),
@@ -143,7 +165,7 @@ Instr_Reg 	IR(.Clk(Clock),
 			   
 Banco_Reg 	BRE(.Clk(Clock),
 			   .Reset(rst),
-			   .RegWrite(rgwrt),
+			   .RegWrite(RegWrite),
 			   .ReadReg1(I25_21),
 			   .ReadReg2(I20_16),
 			   .WriteReg(WriteRegister),
@@ -162,12 +184,8 @@ Ula32		 ALU(.A(ALUAin),
 				 .Igual(),
 				 .Maior(),
 				 .Menor());
-			
+
+SignExtend signExtend (.A(I15_0),
+					   .Out(signExtended));
 			   
-
-			   
-
-
-
-
 endmodule

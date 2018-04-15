@@ -1,39 +1,95 @@
-module Control(Clk, Reset, OP, PCWrite, IorD, Funct, wr, MemtoReg, IRWrite, PCSource, AluOp, AluSrcB, AluSrcA, AluOutWrite, RegWrite, RegDst, State, MDRWrite, AWrite, BWrite);
+module Control(Clk, 
+			   Reset, 
+			   OP, 
+			   PCWrite, 
+			   IorD, 
+			   Funct, 
+			   wr, 
+			   MemtoReg, 
+			   IRWrite_C, 
+			   PCSource, 
+			   AluOp, 
+			   AluSrcB, 
+			   AluSrcA, 
+			   AluOutWrite, 
+			   RegWrite_C, 
+			   RegDst, 
+			   State, 
+			   MDRWrite, 
+			   AWrite, 
+			   BWrite);
 
 	input logic Clk, Reset;
 	input logic [5:0] OP, Funct;
 	
 	output logic [2:0] AluOp;
 	output logic [1:0] PCSource, AluSrcB;
-	output logic PCWrite, IorD, wr, MemtoReg, IRWrite, RegDst, AluSrcA, AluOutWrite, RegWrite, MDRWrite, AWrite, BWrite;
+	output logic PCWrite, 
+				 IorD, 
+				 wr, 
+				 MemtoReg, 
+				 IRWrite_C, 
+				 RegDst, 
+				 AluSrcA, 
+				 AluOutWrite, 
+				 RegWrite_C, 
+				 MDRWrite, 
+				 AWrite, 
+				 BWrite;
 	output logic [5:0] State;
 	
 	
 	logic [5:0] st, StateA;
     
-    //Estados
+    //Estados de Escrita da Decodificação
+    parameter A_AND_B_WRITE_ADD = 5;
+    parameter A_AND_B_WRITE_SUB = 6;
+    parameter A_AND_B_WRITE_AND = 7;
+    parameter A_AND_B_WRITE_XOR = 8;
+    parameter A_AND_B_WRITE_LW = 9;
+    parameter A_AND_B_WRITE_SW = 10;
+    parameter A_AND_B_WRITE_BEQ = 11;
+    parameter A_AND_B_WRITE_BNE = 12;
+    parameter A_AND_B_WRITE_LUI = 13;
+    
+    //Estado de Reset 
 	parameter RESET = 0;
-	parameter INSTR_FETCH = 1;
-	parameter IDLE = 2;
-	parameter INSTR_DECODE = 3;
-	parameter PC_WRT = 4;
-	parameter STOP_PC = 5;
-	parameter MEM_WRITE = 6;
-	parameter IDLE_MEMORY = 7;
-	parameter OP_NFOUND = 8;	
-	parameter RTYPE = 9;
-	parameter BEQ = 10;
-	parameter BNE = 11;
-	parameter LW = 12;
-	parameter SW = 13;
-	parameter LUI = 14;
-	parameter J = 15;
-	parameter ADD = 16;
-	parameter AND = 17;
-	parameter SUB = 18;
-	parameter XOR = 19;
-	parameter BREAK = 20;
-	parameter NOP = 21;
+	
+	//Estado de Espera
+	parameter WAIT_1 = 50;
+	parameter WAIT_2 = 51;
+	parameter WAIT_3 = 52;
+	
+	//
+	parameter MEMORY_ACCESS = 1;
+	parameter MEMORY_ACCESS_LOAD_INSTR = 26;
+	parameter MDR_WRITE_LOAD_INSTR = 27;
+	parameter REGISTER_WRITE_LOAD_INSTR = 28;
+	parameter INCREMENT_PC = 2;
+
+	parameter INSTR_WRITE = 3;
+	parameter INSTR_DECODE = 4;
+	parameter A_AND_B_WRITE = 5;
+	parameter ALU_OUT_WRITE_R_TYPE = 23;
+	parameter ALU_OUT_WRITE_LOAD = 25;
+	parameter REGISTER_WRITE_RTYPE = 24;
+	parameter PC_WRT = 6;
+	parameter STOP_PC = 7;
+	parameter MEM_WRITE = 8;
+	parameter OP_NFOUND = 9;	
+	parameter RTYPE = 10;
+	parameter BEQ = 11;
+	parameter BNE = 12;
+	parameter LW = 13;
+	parameter SW = 14;
+	parameter LUI = 15;
+	parameter J = 16;
+	parameter ADD = 17;
+	parameter AND = 18;
+	parameter SUB = 19;
+	parameter XOR = 20;
+	parameter BREAK = 21;
+	parameter NOP = 22;
 	
 	
 	//OPCODES
@@ -65,91 +121,332 @@ always @ (posedge Clk) begin
 		RegDst = 1'b0;
 		PCSource = 2'b00;
 		AluOp = 3'b000;
-		IRWrite = 1'b0;
+		IRWrite_C = 1'b0;
 		RegDst = 1'b0;
 		AluSrcA = 1'b0;
 		AluSrcB = 2'b00;
 		AluOutWrite = 1'b0;
-		RegWrite = 1'b0;
+		RegWrite_C = 1'b0;
 		MDRWrite = 1'b0;
 		AWrite = 1'b0;
 		BWrite = 1'b0;
 		
-		st <= INSTR_FETCH;
+		st <= MEMORY_ACCESS;
 		end
 		
-		INSTR_FETCH: begin
-		
+		MEMORY_ACCESS: begin
+			PCWrite = 1'b0;
+			MemtoReg = 1'b0;
+			RegDst = 1'b0;
+			PCSource = 2'b00;
+			AluOp = 3'b000;
+			IRWrite_C = 1'b0;
+			RegDst = 1'b0;
+			AluSrcA = 1'b0;
+			AluSrcB = 2'b00;
+			AluOutWrite = 1'b0;
+			RegWrite_C = 1'b0;
+			MDRWrite = 1'b0;
+			AWrite = 1'b0;
+			BWrite = 1'b0;		
 			IorD = 1'b0;
 			wr = 1'b0;
 		
-		st <= IDLE;
+		st <= INCREMENT_PC;
 		end
 		
-		IDLE: begin
-		
+		INCREMENT_PC: begin
+			MemtoReg = 1'b0;
+			RegDst = 1'b0;
+			IRWrite_C = 1'b0;
+			RegDst = 1'b0;
+			AluOutWrite = 1'b0;
+			RegWrite_C = 1'b0;
+			MDRWrite = 1'b0;
+			AWrite = 1'b0;
+			BWrite = 1'b0;		
+			IorD = 1'b0;
+			wr = 1'b0;
 			AluSrcA = 1'b0;
 			AluSrcB = 2'b01;
 			AluOp = 3'b001;
 			PCWrite = 1'b1;
 			PCSource = 2'b00;
 		
-		st <= IDLE_MEMORY;
+			st <= WAIT1;
 		end
 		
-		IDLE_MEMORY: begin
-			IRWrite = 1'b1;
+		WAIT1: begin
+			PCWrite = 1'b0;
+			st <= INSTR_WRITE;
+		end
+		
+		INSTR_WRITE: begin
+			PCWrite = 1'b0;
+			MemtoReg = 1'b0;
+			RegDst = 1'b0;
+			IRWrite_C = 1'b1;
+			RegDst = 1'b0;
+			AluOutWrite = 1'b0;
+			RegWrite_C = 1'b0;
+			MDRWrite = 1'b0;
+			AWrite = 1'b0;
+			BWrite = 1'b0;		
+			IorD = 1'b0;
+			wr = 1'b0;
+			AluSrcA = 1'b0;
+			AluSrcB = 2'b00;
+			AluOp = 3'b000;
+			PCSource = 2'b00;
 			st <= INSTR_DECODE;
 		end
 		
 		INSTR_DECODE: begin
 			PCWrite = 1'b0;
-			IRWrite = 1'b0;
+			MemtoReg = 1'b0;
+			RegDst = 1'b0;
+			IRWrite_C = 1'b0;
+			RegDst = 1'b0;
+			AluOutWrite = 1'b0;
+			RegWrite_C = 1'b0;
+			MDRWrite = 1'b0;
+			AWrite = 1'b0;
+			BWrite = 1'b0;		
+			IorD = 1'b0;
+			wr = 1'b0;
 			AluSrcA = 1'b0;
-			AluSrcB = 2'b01;
-			RegWrite = 1'b0;
-			AluOp = 3'b001;
+			AluSrcB = 2'b00;
+			AluOp = 3'b000;
+			PCSource = 2'b00;
+			
+			case(OP)	
+				OP_R: begin
+					case(Funct)
+						6'h20: begin //ADD
+							st <= A_AND_B_WRITE;
+						end
+						6'h24: begin //AND
+							st <= A_AND_B_WRITE;
+						end
+						6'h22: begin //SUB
+							st <= A_AND_B_WRITE;
+						end
+						6'h26: begin //XOR
+							st <= A_AND_B_WRITE;
+						end
+						6'hd: begin //BREAK
+							st <= BREAK;
+						end
+					endcase
+				end
+				OP_BEQ: begin
+					st <= A_AND_B_WRITE;
+				end
+				OP_BNE: begin
+					st <= A_AND_B_WRITE;
+				end
+				OP_LW: begin
+					st <= A_AND_B_WRITE;
+				end
+				OP_SW: begin
+					st <= A_AND_B_WRITE;
+				end
+				OP_LUI: begin
+					st <= A_AND_B_WRITE;
+				end
+				//OP_J: begin
+					//st <= BIT_EXTENSION;
+				//end
+			endcase
+		end			
+			
+		A_AND_B_WRITE: begin
+			PCWrite = 1'b0;
+			MemtoReg = 1'b0;
+			RegDst = 1'b0;
+			IRWrite_C = 1'b0;
+			RegDst = 1'b0;
+			AluOutWrite = 1'b0;
+			RegWrite_C = 1'b0;
+			MDRWrite = 1'b0;	
+			IorD = 1'b0;
+			wr = 1'b0;
+			AluSrcA = 1'b0;
+			AluSrcB = 2'b00;
+			AluOp = 3'b000;
+			PCSource = 2'b00;
 			AWrite = 1'b1;
 			BWrite = 1'b1;
+			
 			case(OP)	
-			OP_R: begin
-				case(Funct)
-				6'h20: begin
-				st <= ADD;
+				OP_R: begin
+					case(Funct)
+						6'h20: begin //ADD
+							st <= ADD;
+						end
+						6'h24: begin //AND
+							st <= MEMORY_ACCESS;
+						end
+						6'h22: begin //SUB
+							st <= MEMORY_ACCESS;
+						end
+						6'h26: begin //XOR
+							st <= MEMORY_ACCESS;
+						end
+						default: begin
+							st <= MEMORY_ACCESS;
+						end
+					endcase
 				end
-				6'h24: begin
-				st <= AND;
-				end
-				6'h22: begin
-				st <= SUB;
-				end
-				6'h26: begin
-				st <= XOR;
-				end
-				6'hd: begin
-				st <= BREAK;
+				OP_LW: begin
+					PCWrite = 1'b0;
+					MemtoReg = 1'b0;
+					RegDst = 1'b0;
+					IRWrite_C = 1'b0;
+					RegDst = 1'b0;
+					AluOutWrite = 1'b0;
+					RegWrite_C = 1'b0;
+					MDRWrite = 1'b0;	
+					IorD = 1'b0;
+					wr = 1'b0;
+					AluSrcA = 1'b1;
+					AluSrcB = 2'b10;
+					AluOp = 3'b001;
+					PCSource = 2'b00;
+					AWrite = 1'b0;
+					BWrite = 1'b0;
+					st <= ALU_OUT_WRITE_LOAD;
 				end
 			endcase
-			end
-			BEQ: begin
-				st <= BEQ;
-			end
-			ADD: begin
-				st <= INSTR_FETCH;
-			end
-			SUB: begin
-				st <= INSTR_FETCH;
-			end
-			AND: begin
-				st <= INSTR_FETCH;
-			end
-			
-			default: begin
-				st <= OP_NFOUND;
-			end
-		endcase
 		end
 		
+		ADD: begin
+			PCWrite = 1'b0;
+			MemtoReg = 1'b0;
+			RegDst = 1'b0;
+			IRWrite_C = 1'b0;
+			RegDst = 1'b0;
+			AluOutWrite = 1'b0;
+			RegWrite_C = 1'b0;
+			MDRWrite = 1'b0;
+			AWrite = 1'b0;
+			BWrite = 1'b0;		
+			IorD = 1'b0;
+			wr = 1'b0;
+			PCSource = 2'b00;
+			
+			AluOp = 3'b001;
+			AluSrcA = 1'b1;
+			AluSrcB = 2'b00;
+			st <= ALU_OUT_WRITE_R_TYPE;
+		end
+
+	//Estados de Escrita em ALUOut
+		ALU_OUT_WRITE_LOAD: begin
+			AluOutWrite = 1'b1;
+			st <= MEMORY_ACCESS_LOAD_INSTR;
+		end
+		
+		ALU_OUT_WRITE_R_TYPE: begin
+			AluOutWrite = 1'b1;
+			st <= REGISTER_WRITE_RTYPE;
+		end
+		
+		MEMORY_ACCESS_LOAD_INSTR: begin
+			PCWrite = 1'b0;
+			MemtoReg = 1'b0;
+			RegDst = 1'b0;
+			IRWrite_C = 1'b0;
+			RegDst = 1'b0;
+			AluOutWrite = 1'b0;
+			RegWrite_C = 1'b0;
+			MDRWrite = 1'b0;
+			AWrite = 1'b0;
+			BWrite = 1'b0;		
+			IorD = 1'b1;
+			wr = 1'b0;
+			PCSource = 2'b00;	
+			AluOp = 3'b000;
+			AluSrcA = 1'b0;
+			AluSrcB = 2'b00;
+			
+			st <= WAIT_2;
+		end
+		
+		WAIT_2: begin
+			st <= WAIT_3;
+		end
+		
+		WAIT_3: begin
+			st <= MDR_WRITE_LOAD_INSTR;
+		end
+		
+		MDR_WRITE_LOAD_INSTR: begin
+			PCWrite = 1'b0;
+			MemtoReg = 1'b0;
+			RegDst = 1'b0;
+			IRWrite_C = 1'b0;
+			RegDst = 1'b0;
+			AluOutWrite = 1'b0;
+			RegWrite_C = 1'b0;
+			MDRWrite = 1'b1;
+			AWrite = 1'b0;
+			BWrite = 1'b0;		
+			IorD = 1'b0;
+			wr = 1'b0;
+			PCSource = 2'b00;	
+			AluOp = 3'b000;
+			AluSrcA = 1'b0;
+			AluSrcB = 2'b00;
+			
+			st <= REGISTER_WRITE_LOAD_INSTR;
+		end
+			
+	
+	//Estados de Escrita no Banco de Registradores	
+		REGISTER_WRITE_RTYPE: begin
+			PCWrite = 1'b0;
+			MemtoReg = 1'b0;
+			RegDst = 1'b0;
+			IRWrite_C = 1'b0;
+			RegDst = 1'b1;
+			AluOutWrite = 1'b0;
+			RegWrite_C = 1'b1;
+			MDRWrite = 1'b0;
+			AWrite = 1'b0;
+			BWrite = 1'b0;		
+			IorD = 1'b0;
+			wr = 1'b0;
+			PCSource = 2'b00;
+			AluOp = 3'b000;
+			AluSrcA = 1'b0;
+			AluSrcB = 2'b00;
+			
+			st <= MEMORY_ACCESS;
+			//default: begin
+			//	st <= OP_NFOUND;
+			//end
+		end
+		
+		REGISTER_WRITE_LOAD_INSTR: begin
+			PCWrite = 1'b0;
+			MemtoReg = 1'b1;
+			RegDst = 1'b0;
+			IRWrite_C = 1'b0;
+			RegDst = 1'b0;
+			AluOutWrite = 1'b0;
+			RegWrite_C = 1'b1;
+			MDRWrite = 1'b1;
+			AWrite = 1'b0;
+			BWrite = 1'b0;		
+			IorD = 1'b1;
+			wr = 1'b0;
+			PCSource = 2'b00;
+			AluOp = 3'b000;
+			AluSrcA = 1'b0;
+			AluSrcB = 2'b00;
+			st <= MEMORY_ACCESS;
+		end
 	endcase
-end	
+end
 endmodule

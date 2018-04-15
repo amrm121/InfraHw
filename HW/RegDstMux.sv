@@ -5,8 +5,10 @@ output logic [4:0] wrtRegMux_out;
 
 always @ (RegDst) begin
 case(RegDst)
-1'b0:wrtRegMux_out <= I20_16;
-1'b1:wrtRegMux_out <= I15_11;
+1'b0:
+	wrtRegMux_out <= I20_16;
+1'b1:
+	wrtRegMux_out <= I15_11;
 endcase
 end
 endmodule 
