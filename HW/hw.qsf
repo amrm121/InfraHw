@@ -46,6 +46,13 @@ set_global_assignment -name USE_GENERATED_PHYSICAL_CONSTRAINTS OFF -section_id e
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name MISC_FILE "C:/Users/bah/Desktop/HW/hw.dpf"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
+set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
+set_global_assignment -name SIMULATION_MODE FUNCTIONAL
+set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE CPU.vwf
+set_global_assignment -name SIMULATOR_GENERATE_SIGNAL_ACTIVITY_FILE OFF
 set_global_assignment -name MIF_FILE instrucoes.mif
 set_global_assignment -name VHDL_FILE "../Componentes do Projeto/Banco_reg.vhd"
 set_global_assignment -name VHDL_FILE "../Componentes do Projeto/Instr_Reg.vhd"
@@ -55,8 +62,11 @@ set_global_assignment -name VHDL_FILE "../Componentes do Projeto/Registrador.vhd
 set_global_assignment -name VHDL_FILE "../Componentes do Projeto/ula32.vhd"
 set_global_assignment -name SYSTEMVERILOG_FILE Control.sv
 set_global_assignment -name SYSTEMVERILOG_FILE CPU.sv
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
-set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
+set_global_assignment -name VECTOR_WAVEFORM_FILE CPU.vwf
+set_global_assignment -name SYSTEMVERILOG_FILE IorDMux.sv
+set_global_assignment -name SYSTEMVERILOG_FILE RegDstMux.sv
+set_global_assignment -name SYSTEMVERILOG_FILE MDRMux.sv
+set_global_assignment -name SYSTEMVERILOG_FILE AluAMux.sv
+set_global_assignment -name SYSTEMVERILOG_FILE AluBMux.sv
+set_global_assignment -name SYSTEMVERILOG_FILE PCSourceMux.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

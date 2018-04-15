@@ -1,61 +1,15 @@
-module Control(clk, Reset, OP, Funct, PCWrite, IorD, MemRead, MemWrite, MemtoReg, IRWrite, CauseWrite, IntCause, EPCWrite, PCSource, ALUOp, ALUSrcB, ALUSrcA, RegWrite, RegDst, AWrite, BWrite, StateAux, ResetPC, ResetA, ResetB, ResetEPC);
+module Control(Clk, Reset, OP, PCWrite, IorD, Funct, wr, MemtoReg, IRWrite, PCSource, AluOp, AluSrcB, AluSrcA, AluOutWrite, RegWrite, RegDst, State, MDRWrite, AWrite, BWrite);
 
-	input clk;
-	input Reset;
-	input [5:0] OP;
-	input [5:0] Funct;
+	input logic Clk, Reset;
+	input logic [5:0] OP, Funct;
 	
-
-	output reg [5:0] StateAux; //estado auxiliar
-	output reg PCWrite;
-	output reg IorD;
-	output reg MemRead; 
-	output reg MemWrite;
-	output reg MemtoReg; //regwrite
-	output reg IRWrite; 
-	output reg CauseWrite;
-	output reg IntCause;
-	output reg EPCWrite;
-	output reg AWrite;
-	output reg BWrite;
-	output reg [1:0] PCSource;
-	output reg [2:0] ALUOp;
-	output reg ALUSrcA;
-	output reg [1:0] ALUSrcB;
-	output reg RegWrite;
-	output reg RegDst;
-	output reg ResetPC;
-	output reg ResetA;
-	output reg ResetB;
-	output reg ResetEPC;
+	output logic [2:0] AluOp;
+	output logic [1:0] PCSource, AluSrcB;
+	output logic PCWrite, IorD, wr, MemtoReg, IRWrite, RegDst, AluSrcA, AluOutWrite, RegWrite, MDRWrite, AWrite, BWrite;
+	output logic [5:0] State;
 	
 	
-	reg[5:0] st;
-	reg ct;
-	
-	//regwrite
-    parameter N_LOAD = 1'b0;
-    parameter LOAD = 1'b1;
-    parameter CLEAR = 1'b1;
-    parameter N_CLEAR = 1'b0;
-    
-    //mem read/write
-    parameter READ = 1'b0;
-    parameter WRITE = 1'b1;
-    
-    //IorD
-    parameter ID_PC = 1'b0;
-    parameter ID_ALUOUT = 1'b1;
-    
-    //ALUSrcA
-    parameter SA_PC = 1'b0; //PC
-    parameter SA_A = 1'b1;
-    
-    //ALUSrcB
-    parameter SB_4 = 2'b00; //PC+4
-    parameter SB_B = 2'b01;
-    parameter SB_SL2 = 2'b10; 
-    parameter SB_SE = 2'b11;
+	logic [5:0] st, StateA;
     
     //Estados
 	parameter RESET = 0;
@@ -66,7 +20,7 @@ module Control(clk, Reset, OP, Funct, PCWrite, IorD, MemRead, MemWrite, MemtoReg
 	parameter STOP_PC = 5;
 	parameter MEM_WRITE = 6;
 	parameter IDLE_MEMORY = 7;
-	parameter OP_NFOUND = 8;
+	parameter OP_NFOUND = 8;	
 	parameter RTYPE = 9;
 	parameter BEQ = 10;
 	parameter BNE = 11;
@@ -82,16 +36,6 @@ module Control(clk, Reset, OP, Funct, PCWrite, IorD, MemRead, MemWrite, MemtoReg
 	parameter NOP = 21;
 	
 	
-	//ALU
-	parameter ALU_LOAD = 0;
-	parameter ALU_ADD = 1;
-	parameter ALU_SUB = 2;
-	parameter ALU_AND = 3;
-	parameter ALU_I = 4;
-	parameter ALU_NOT = 5;
-	parameter ALU_XOR = 6;
-	parameter ALU_EQ = 7;
-	
 	//OPCODES
 	parameter OP_R = 6'h0;
 	parameter OP_BEQ = 6'h4;
@@ -100,96 +44,112 @@ module Control(clk, Reset, OP, Funct, PCWrite, IorD, MemRead, MemWrite, MemtoReg
 	parameter OP_SW = 6'h2b;
 	parameter OP_LUI = 6'hf;
     parameter OP_J = 6'h2;
-    
     initial begin
-		st <= RESET;
+	  st <= RESET;
 	end
+    
+    
 	
-always @ (negedge clk) begin
-    StateAux <= st;
+always @ (posedge Clk) begin
+	
+    State <= st;
     
     case(st)
-    
+		
 		RESET: begin 
 		
-		ResetPC <= CLEAR;
-		ResetA <= CLEAR;
-		ResetB <= CLEAR;
-		ResetEPC <= CLEAR;
-		RegWrite <= LOAD;
+		PCWrite = 1'b0;
+		IorD = 1'b0;
+		wr = 1'b0;
+		MemtoReg = 1'b0;
+		RegDst = 1'b0;
+		PCSource = 2'b00;
+		AluOp = 3'b000;
+		IRWrite = 1'b0;
+		RegDst = 1'b0;
+		AluSrcA = 1'b0;
+		AluSrcB = 2'b00;
+		AluOutWrite = 1'b0;
+		RegWrite = 1'b0;
+		MDRWrite = 1'b0;
+		AWrite = 1'b0;
+		BWrite = 1'b0;
+		
 		st <= INSTR_FETCH;
 		end
 		
 		INSTR_FETCH: begin
 		
-		RegWrite <= N_LOAD;
-		ResetPC <= N_CLEAR;
-		ResetA <= N_CLEAR;
-		ResetB <= N_CLEAR;
-		ResetEPC <= N_CLEAR;
-		
-		MemRead <= READ;
-		ALUSrcA <= SA_PC;
-		ALUSrcB <= SB_4;
-		ALUOp <= ALU_ADD;
-		PCWrite <= LOAD;
-		IorD <= ID_PC;
+			IorD = 1'b0;
+			wr = 1'b0;
 		
 		st <= IDLE;
 		end
 		
 		IDLE: begin
 		
-		IRWrite <= LOAD;
-		PCWrite <= N_LOAD;
+			AluSrcA = 1'b0;
+			AluSrcB = 2'b01;
+			AluOp = 3'b001;
+			PCWrite = 1'b1;
+			PCSource = 2'b00;
 		
-		st <= INSTR_DECODE;
+		st <= IDLE_MEMORY;
+		end
+		
+		IDLE_MEMORY: begin
+			IRWrite = 1'b1;
+			PCWrite = 1'b0;
+			st <= INSTR_DECODE;
 		end
 		
 		INSTR_DECODE: begin
-		
-		IRWrite <= N_LOAD;
-		ALUSrcA <= SA_PC;
-		ALUSrcB <= SB_SL2;
-		RegWrite <= N_LOAD;
-		ALUOp <= ALU_ADD;
-		AWrite <= LOAD;
-		BWrite <= LOAD;
-		case(OP)
-			OP_BEQ: begin
-				st <= BEQ;
-			end
-			
+			IRWrite = 1'b0;
+			AluSrcA = 1'b0;
+			AluSrcB = 2'b01;
+			RegWrite = 1'b0;
+			AluOp = 3'b001;
+			AWrite = 1'b1;
+			BWrite = 1'b1;
+			case(OP)	
 			OP_R: begin
 				case(Funct)
 				6'h20: begin
-					st <= ADD;
+				st <= ADD;
 				end
 				6'h24: begin
-					st <= AND;
+				st <= AND;
 				end
 				6'h22: begin
-					st <= SUB;
+				st <= SUB;
 				end
 				6'h26: begin
-					st <= XOR;
+				st <= XOR;
 				end
 				6'hd: begin
-					st <= BREAK;
+				st <= BREAK;
 				end
-				6'h0: begin
-					st <= NOP;
-				end
-				endcase
+			endcase
+			end
+			BEQ: begin
+				st <= BEQ;
+			end
+			ADD: begin
+				st <= INSTR_FETCH;
+			end
+			SUB: begin
+				st <= INSTR_FETCH;
+			end
+			AND: begin
+				st <= INSTR_FETCH;
 			end
 			
 			default: begin
 				st <= OP_NFOUND;
 			end
-			endcase
-			end
 		endcase
+		end
 		
-end
-
+	endcase
+end	
 endmodule

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for hw
-Thu Apr 12 02:34:47 2018
+Sun Apr 15 05:10:55 2018
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -9,8 +9,36 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
   1. Legal Notice
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
-  4. Analysis & Synthesis Messages
-  5. Analysis & Synthesis Suppressed Messages
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis RAM Summary
+  9. State Machine - |CPU|Control:control|st
+ 10. Registers Removed During Synthesis
+ 11. Removed Registers Triggering Further Register Optimizations
+ 12. General Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Source assignments for Memoria:MEM|LPM_RAM_DQ:MEM|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated
+ 15. Source assignments for Memoria:MEM|LPM_RAM_DQ:MEM_plus_One|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated
+ 16. Source assignments for Memoria:MEM|LPM_RAM_DQ:MEM_plus_Two|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated
+ 17. Source assignments for Memoria:MEM|LPM_RAM_DQ:MEM_plus_Three|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated
+ 18. Parameter Settings for User Entity Instance: Control:control
+ 19. Parameter Settings for User Entity Instance: Memoria:MEM|LPM_RAM_DQ:MEM
+ 20. Parameter Settings for User Entity Instance: Memoria:MEM|LPM_RAM_DQ:MEM_plus_One
+ 21. Parameter Settings for User Entity Instance: Memoria:MEM|LPM_RAM_DQ:MEM_plus_Two
+ 22. Parameter Settings for User Entity Instance: Memoria:MEM|LPM_RAM_DQ:MEM_plus_Three
+ 23. Port Connectivity Checks: "Ula32:ALU"
+ 24. Port Connectivity Checks: "Banco_reg:BRE"
+ 25. Port Connectivity Checks: "Instr_Reg:IR"
+ 26. Port Connectivity Checks: "Registrador:A"
+ 27. Port Connectivity Checks: "PCSourceMux:pcmux"
+ 28. Port Connectivity Checks: "AluBMux:rbmux"
+ 29. Port Connectivity Checks: "AluAMux:ramux"
+ 30. Port Connectivity Checks: "RegDstMux:rdmux"
+ 31. Port Connectivity Checks: "Control:control"
+ 32. Analysis & Synthesis Messages
+ 33. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -36,20 +64,20 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Failed - Thu Apr 12 02:34:47 2018            ;
+; Analysis & Synthesis Status        ; Successful - Sun Apr 15 05:10:54 2018        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; hw                                           ;
 ; Top-level Entity Name              ; CPU                                          ;
 ; Family                             ; Cyclone II                                   ;
-; Total logic elements               ; N/A until Partition Merge                    ;
-;     Total combinational functions  ; N/A until Partition Merge                    ;
-;     Dedicated logic registers      ; N/A until Partition Merge                    ;
-; Total registers                    ; N/A until Partition Merge                    ;
-; Total pins                         ; N/A until Partition Merge                    ;
-; Total virtual pins                 ; N/A until Partition Merge                    ;
-; Total memory bits                  ; N/A until Partition Merge                    ;
-; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                    ;
-; Total PLLs                         ; N/A until Partition Merge                    ;
+; Total logic elements               ; 82                                           ;
+;     Total combinational functions  ; 67                                           ;
+;     Dedicated logic registers      ; 55                                           ;
+; Total registers                    ; 55                                           ;
+; Total pins                         ; 395                                          ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 8,192                                        ;
+; Embedded Multiplier 9-bit elements ; 0                                            ;
+; Total PLLs                         ; 0                                            ;
 +------------------------------------+----------------------------------------------+
 
 
@@ -132,13 +160,933 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 
 
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 3      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                          ;
++-------------------------------------------+-----------------+----------------------------------+----------------------------------------------------------------+
+; File Name with User-Entered Path          ; Used in Netlist ; File Type                        ; File Name with Absolute Path                                   ;
++-------------------------------------------+-----------------+----------------------------------+----------------------------------------------------------------+
+; instrucoes.mif                            ; yes             ; User Memory Initialization File  ; C:/Users/bah/Desktop/HW/instrucoes.mif                         ;
+; ../Componentes do Projeto/Banco_reg.vhd   ; yes             ; User VHDL File                   ; C:/Users/bah/Desktop/Componentes do Projeto/Banco_reg.vhd      ;
+; ../Componentes do Projeto/Instr_Reg.vhd   ; yes             ; User VHDL File                   ; C:/Users/bah/Desktop/Componentes do Projeto/Instr_Reg.vhd      ;
+; ../Componentes do Projeto/Memoria.vhd     ; yes             ; User VHDL File                   ; C:/Users/bah/Desktop/Componentes do Projeto/Memoria.vhd        ;
+; ../Componentes do Projeto/Registrador.vhd ; yes             ; User VHDL File                   ; C:/Users/bah/Desktop/Componentes do Projeto/Registrador.vhd    ;
+; ../Componentes do Projeto/ula32.vhd       ; yes             ; User VHDL File                   ; C:/Users/bah/Desktop/Componentes do Projeto/ula32.vhd          ;
+; Control.sv                                ; yes             ; User SystemVerilog HDL File      ; C:/Users/bah/Desktop/HW/Control.sv                             ;
+; CPU.sv                                    ; yes             ; User SystemVerilog HDL File      ; C:/Users/bah/Desktop/HW/CPU.sv                                 ;
+; IorDMux.sv                                ; yes             ; User SystemVerilog HDL File      ; C:/Users/bah/Desktop/HW/IorDMux.sv                             ;
+; RegDstMux.sv                              ; yes             ; User SystemVerilog HDL File      ; C:/Users/bah/Desktop/HW/RegDstMux.sv                           ;
+; MDRMux.sv                                 ; yes             ; User SystemVerilog HDL File      ; C:/Users/bah/Desktop/HW/MDRMux.sv                              ;
+; AluAMux.sv                                ; yes             ; User SystemVerilog HDL File      ; C:/Users/bah/Desktop/HW/AluAMux.sv                             ;
+; AluBMux.sv                                ; yes             ; User SystemVerilog HDL File      ; C:/Users/bah/Desktop/HW/AluBMux.sv                             ;
+; PCSourceMux.sv                            ; yes             ; User SystemVerilog HDL File      ; C:/Users/bah/Desktop/HW/PCSourceMux.sv                         ;
+; lpm_ram_dq.tdf                            ; yes             ; Megafunction                     ; c:/altera/91sp2/quartus/libraries/megafunctions/lpm_ram_dq.tdf ;
+; altram.tdf                                ; yes             ; Megafunction                     ; c:/altera/91sp2/quartus/libraries/megafunctions/altram.tdf     ;
+; altsyncram.tdf                            ; yes             ; Megafunction                     ; c:/altera/91sp2/quartus/libraries/megafunctions/altsyncram.tdf ;
+; db/altsyncram_e1a1.tdf                    ; yes             ; Auto-Generated Megafunction      ; C:/Users/bah/Desktop/HW/db/altsyncram_e1a1.tdf                 ;
++-------------------------------------------+-----------------+----------------------------------+----------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Estimated Total logic elements              ; 82    ;
+;                                             ;       ;
+; Total combinational functions               ; 67    ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 37    ;
+;     -- 3 input functions                    ; 25    ;
+;     -- <=2 input functions                  ; 5     ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 67    ;
+;     -- arithmetic mode                      ; 0     ;
+;                                             ;       ;
+; Total registers                             ; 55    ;
+;     -- Dedicated logic registers            ; 55    ;
+;     -- I/O registers                        ; 0     ;
+;                                             ;       ;
+; I/O pins                                    ; 395   ;
+; Total memory bits                           ; 8192  ;
+; Maximum fan-out node                        ; Clock ;
+; Maximum fan-out                             ; 87    ;
+; Total fan-out                               ; 809   ;
+; Average fan-out                             ; 1.47  ;
++---------------------------------------------+-------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                     ;
++-------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                      ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                        ; Library Name ;
++-------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------+--------------+
+; |CPU                                            ; 67 (1)            ; 55 (0)       ; 8192        ; 0            ; 0       ; 0         ; 395  ; 0            ; |CPU                                                                                                       ; work         ;
+;    |Control:control|                            ; 22 (22)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Control:control                                                                                       ;              ;
+;    |Instr_Reg:IR|                               ; 0 (0)             ; 11 (11)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Instr_Reg:IR                                                                                          ; work         ;
+;    |Memoria:MEM|                                ; 0 (0)             ; 0 (0)        ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM                                                                                           ; work         ;
+;       |lpm_ram_dq:MEM_plus_One|                 ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM_plus_One                                                                   ; work         ;
+;          |altram:sram|                          ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM_plus_One|altram:sram                                                       ; work         ;
+;             |altsyncram:ram_block|              ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM_plus_One|altram:sram|altsyncram:ram_block                                  ;              ;
+;                |altsyncram_e1a1:auto_generated| ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM_plus_One|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated   ;              ;
+;       |lpm_ram_dq:MEM_plus_Three|               ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM_plus_Three                                                                 ;              ;
+;          |altram:sram|                          ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM_plus_Three|altram:sram                                                     ;              ;
+;             |altsyncram:ram_block|              ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM_plus_Three|altram:sram|altsyncram:ram_block                                ; work         ;
+;                |altsyncram_e1a1:auto_generated| ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM_plus_Three|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated ; work         ;
+;       |lpm_ram_dq:MEM_plus_Two|                 ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM_plus_Two                                                                   ;              ;
+;          |altram:sram|                          ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM_plus_Two|altram:sram                                                       ;              ;
+;             |altsyncram:ram_block|              ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM_plus_Two|altram:sram|altsyncram:ram_block                                  ;              ;
+;                |altsyncram_e1a1:auto_generated| ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM_plus_Two|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated   ;              ;
+;       |lpm_ram_dq:MEM|                          ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM                                                                            ; work         ;
+;          |altram:sram|                          ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM|altram:sram                                                                ; work         ;
+;             |altsyncram:ram_block|              ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM|altram:sram|altsyncram:ram_block                                           ; work         ;
+;                |altsyncram_e1a1:auto_generated| ; 0 (0)             ; 0 (0)        ; 2048        ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Memoria:MEM|lpm_ram_dq:MEM|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated            ; work         ;
+;    |Registrador:PCR|                            ; 0 (0)             ; 30 (30)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Registrador:PCR                                                                                       ; work         ;
+;    |Ula32:ALU|                                  ; 44 (44)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|Ula32:ALU                                                                                             ; work         ;
++-------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                          ;
++------------------------------------------------------------------------------------------------------------------+------+-------------+--------------+--------------+--------------+--------------+------+----------------+
+; Name                                                                                                             ; Type ; Mode        ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF            ;
++------------------------------------------------------------------------------------------------------------------+------+-------------+--------------+--------------+--------------+--------------+------+----------------+
+; Memoria:MEM|lpm_ram_dq:MEM_plus_One|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated|ALTSYNCRAM   ; AUTO ; Single Port ; 256          ; 8            ; --           ; --           ; 2048 ; instrucoes.mif ;
+; Memoria:MEM|lpm_ram_dq:MEM_plus_Three|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated|ALTSYNCRAM ; AUTO ; Single Port ; 256          ; 8            ; --           ; --           ; 2048 ; instrucoes.mif ;
+; Memoria:MEM|lpm_ram_dq:MEM_plus_Two|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated|ALTSYNCRAM   ; AUTO ; Single Port ; 256          ; 8            ; --           ; --           ; 2048 ; instrucoes.mif ;
+; Memoria:MEM|lpm_ram_dq:MEM|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated|ALTSYNCRAM            ; AUTO ; Single Port ; 256          ; 8            ; --           ; --           ; 2048 ; instrucoes.mif ;
++------------------------------------------------------------------------------------------------------------------+------+-------------+--------------+--------------+--------------+--------------+------+----------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |CPU|Control:control|st                                                                                                                         ;
++-----------------+----------+--------+--------+--------+--------+--------+--------------+----------------+-----------------+---------+----------------+----------+
+; Name            ; st.BREAK ; st.XOR ; st.SUB ; st.AND ; st.ADD ; st.BEQ ; st.OP_NFOUND ; st.IDLE_MEMORY ; st.INSTR_DECODE ; st.IDLE ; st.INSTR_FETCH ; st.RESET ;
++-----------------+----------+--------+--------+--------+--------+--------+--------------+----------------+-----------------+---------+----------------+----------+
+; st.RESET        ; 0        ; 0      ; 0      ; 0      ; 0      ; 0      ; 0            ; 0              ; 0               ; 0       ; 0              ; 0        ;
+; st.INSTR_FETCH  ; 0        ; 0      ; 0      ; 0      ; 0      ; 0      ; 0            ; 0              ; 0               ; 0       ; 1              ; 1        ;
+; st.IDLE         ; 0        ; 0      ; 0      ; 0      ; 0      ; 0      ; 0            ; 0              ; 0               ; 1       ; 0              ; 1        ;
+; st.INSTR_DECODE ; 0        ; 0      ; 0      ; 0      ; 0      ; 0      ; 0            ; 0              ; 1               ; 0       ; 0              ; 1        ;
+; st.IDLE_MEMORY  ; 0        ; 0      ; 0      ; 0      ; 0      ; 0      ; 0            ; 1              ; 0               ; 0       ; 0              ; 1        ;
+; st.OP_NFOUND    ; 0        ; 0      ; 0      ; 0      ; 0      ; 0      ; 1            ; 0              ; 0               ; 0       ; 0              ; 1        ;
+; st.BEQ          ; 0        ; 0      ; 0      ; 0      ; 0      ; 1      ; 0            ; 0              ; 0               ; 0       ; 0              ; 1        ;
+; st.ADD          ; 0        ; 0      ; 0      ; 0      ; 1      ; 0      ; 0            ; 0              ; 0               ; 0       ; 0              ; 1        ;
+; st.AND          ; 0        ; 0      ; 0      ; 1      ; 0      ; 0      ; 0            ; 0              ; 0               ; 0       ; 0              ; 1        ;
+; st.SUB          ; 0        ; 0      ; 1      ; 0      ; 0      ; 0      ; 0            ; 0              ; 0               ; 0       ; 0              ; 1        ;
+; st.XOR          ; 0        ; 1      ; 0      ; 0      ; 0      ; 0      ; 0            ; 0              ; 0               ; 0       ; 0              ; 1        ;
+; st.BREAK        ; 1        ; 0      ; 0      ; 0      ; 0      ; 0      ; 0            ; 0              ; 0               ; 0       ; 0              ; 1        ;
++-----------------+----------+--------+--------+--------+--------+--------+--------------+----------------+-----------------+---------+----------------+----------+
+
+
++----------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                     ;
++------------------------------------------+---------------------------------------------+
+; Register name                            ; Reason for Removal                          ;
++------------------------------------------+---------------------------------------------+
+; Registrador:B|Saida[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Instr_Reg:IR|Instr15_0[5]                ; Lost fanout                                 ;
+; Control:control|MDRWrite                 ; Stuck at GND due to stuck port data_in      ;
+; Control:control|RegWrite                 ; Stuck at GND due to stuck port data_in      ;
+; Control:control|AluOutWrite              ; Stuck at GND due to stuck port data_in      ;
+; Control:control|AluSrcB[1]               ; Stuck at GND due to stuck port data_in      ;
+; Control:control|AluSrcA                  ; Stuck at GND due to stuck port data_in      ;
+; Control:control|AluOp[1..2]              ; Stuck at GND due to stuck port data_in      ;
+; Control:control|PCSource[0..1]           ; Stuck at GND due to stuck port data_in      ;
+; Control:control|RegDst                   ; Stuck at GND due to stuck port data_in      ;
+; Control:control|MemtoReg                 ; Stuck at GND due to stuck port data_in      ;
+; Control:control|wr                       ; Stuck at GND due to stuck port data_in      ;
+; Control:control|IorD                     ; Stuck at GND due to stuck port data_in      ;
+; Control:control|State[5]                 ; Stuck at GND due to stuck port data_in      ;
+; Banco_reg:BRE|Reg0[0..31]                ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg1[0..31]                ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg2[0..31]                ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg3[0..31]                ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg4[0..31]                ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg5[0..31]                ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg6[0..31]                ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg7[0..31]                ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg8[0..31]                ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg9[0..31]                ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg10[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg11[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg12[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg13[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg14[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg15[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg16[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg17[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg18[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg19[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg20[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg21[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg22[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg23[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg24[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg25[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg26[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg27[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg28[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg29[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg30[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Banco_reg:BRE|Reg31[0..31]               ; Stuck at GND due to stuck port clock_enable ;
+; Registrador:AluOutR|Saida[0..31]         ; Stuck at GND due to stuck port clock_enable ;
+; Registrador:RMDR|Saida[0..31]            ; Stuck at GND due to stuck port clock_enable ;
+; Instr_Reg:IR|Instr15_0[11..15]           ; Lost fanout                                 ;
+; Control:control|AluOp[0]                 ; Merged with Control:control|AluSrcB[0]      ;
+; Registrador:PCR|Saida[0..1]              ; Stuck at GND due to stuck port data_in      ;
+; Control:control|st~3                     ; Lost fanout                                 ;
+; Control:control|st~4                     ; Lost fanout                                 ;
+; Control:control|st~5                     ; Lost fanout                                 ;
+; Control:control|st~6                     ; Lost fanout                                 ;
+; Control:control|st~7                     ; Lost fanout                                 ;
+; Control:control|st~8                     ; Lost fanout                                 ;
+; Control:control|st.AND                   ; Stuck at GND due to stuck port data_in      ;
+; Control:control|st.XOR                   ; Stuck at GND due to stuck port data_in      ;
+; Control:control|st.ADD                   ; Stuck at GND due to stuck port data_in      ;
+; Control:control|st.BREAK                 ; Stuck at GND due to stuck port data_in      ;
+; Control:control|st.SUB                   ; Stuck at GND due to stuck port data_in      ;
+; Control:control|State[4]                 ; Stuck at GND due to stuck port data_in      ;
+; Total Number of Removed Registers = 1155 ;                                             ;
++------------------------------------------+---------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                        ;
++-----------------------------+--------------------------------+-------------------------------------------------------------------------------------+
+; Register name               ; Reason for Removal             ; Registers Removed due to This Register                                              ;
++-----------------------------+--------------------------------+-------------------------------------------------------------------------------------+
+; Control:control|RegWrite    ; Stuck at GND                   ; Banco_reg:BRE|Reg0[31], Banco_reg:BRE|Reg0[30], Banco_reg:BRE|Reg0[29],             ;
+;                             ; due to stuck port data_in      ; Banco_reg:BRE|Reg0[28], Banco_reg:BRE|Reg0[27], Banco_reg:BRE|Reg0[26],             ;
+;                             ;                                ; Banco_reg:BRE|Reg0[25], Banco_reg:BRE|Reg0[24], Banco_reg:BRE|Reg0[23],             ;
+;                             ;                                ; Banco_reg:BRE|Reg0[22], Banco_reg:BRE|Reg0[21], Banco_reg:BRE|Reg0[20],             ;
+;                             ;                                ; Banco_reg:BRE|Reg0[19], Banco_reg:BRE|Reg0[18], Banco_reg:BRE|Reg0[17],             ;
+;                             ;                                ; Banco_reg:BRE|Reg0[16], Banco_reg:BRE|Reg0[15], Banco_reg:BRE|Reg0[14],             ;
+;                             ;                                ; Banco_reg:BRE|Reg0[13], Banco_reg:BRE|Reg0[12], Banco_reg:BRE|Reg0[11],             ;
+;                             ;                                ; Banco_reg:BRE|Reg0[10], Banco_reg:BRE|Reg0[9], Banco_reg:BRE|Reg0[8],               ;
+;                             ;                                ; Banco_reg:BRE|Reg0[7], Banco_reg:BRE|Reg0[6], Banco_reg:BRE|Reg0[5],                ;
+;                             ;                                ; Banco_reg:BRE|Reg0[4], Banco_reg:BRE|Reg0[3], Banco_reg:BRE|Reg0[2],                ;
+;                             ;                                ; Banco_reg:BRE|Reg0[1], Banco_reg:BRE|Reg0[0], Banco_reg:BRE|Reg1[31],               ;
+;                             ;                                ; Banco_reg:BRE|Reg1[30], Banco_reg:BRE|Reg1[29], Banco_reg:BRE|Reg1[28],             ;
+;                             ;                                ; Banco_reg:BRE|Reg1[27], Banco_reg:BRE|Reg1[26], Banco_reg:BRE|Reg1[25],             ;
+;                             ;                                ; Banco_reg:BRE|Reg1[24], Banco_reg:BRE|Reg1[23], Banco_reg:BRE|Reg1[22],             ;
+;                             ;                                ; Banco_reg:BRE|Reg1[21], Banco_reg:BRE|Reg1[20], Banco_reg:BRE|Reg1[19],             ;
+;                             ;                                ; Banco_reg:BRE|Reg1[18], Banco_reg:BRE|Reg1[17], Banco_reg:BRE|Reg1[16],             ;
+;                             ;                                ; Banco_reg:BRE|Reg1[15], Banco_reg:BRE|Reg1[14], Banco_reg:BRE|Reg1[13],             ;
+;                             ;                                ; Banco_reg:BRE|Reg1[12], Banco_reg:BRE|Reg1[11], Banco_reg:BRE|Reg1[10],             ;
+;                             ;                                ; Banco_reg:BRE|Reg1[9], Banco_reg:BRE|Reg1[8], Banco_reg:BRE|Reg1[7],                ;
+;                             ;                                ; Banco_reg:BRE|Reg1[6], Banco_reg:BRE|Reg1[5], Banco_reg:BRE|Reg1[4],                ;
+;                             ;                                ; Banco_reg:BRE|Reg1[3], Banco_reg:BRE|Reg1[2], Banco_reg:BRE|Reg1[1],                ;
+;                             ;                                ; Banco_reg:BRE|Reg1[0], Banco_reg:BRE|Reg2[31], Banco_reg:BRE|Reg2[30],              ;
+;                             ;                                ; Banco_reg:BRE|Reg2[29], Banco_reg:BRE|Reg2[28], Banco_reg:BRE|Reg2[27],             ;
+;                             ;                                ; Banco_reg:BRE|Reg2[26], Banco_reg:BRE|Reg2[25], Banco_reg:BRE|Reg2[24],             ;
+;                             ;                                ; Banco_reg:BRE|Reg2[23], Banco_reg:BRE|Reg2[22], Banco_reg:BRE|Reg2[21],             ;
+;                             ;                                ; Banco_reg:BRE|Reg2[20], Banco_reg:BRE|Reg2[19], Banco_reg:BRE|Reg2[18],             ;
+;                             ;                                ; Banco_reg:BRE|Reg2[17], Banco_reg:BRE|Reg2[16], Banco_reg:BRE|Reg2[15],             ;
+;                             ;                                ; Banco_reg:BRE|Reg2[14], Banco_reg:BRE|Reg2[13], Banco_reg:BRE|Reg2[12],             ;
+;                             ;                                ; Banco_reg:BRE|Reg2[11], Banco_reg:BRE|Reg2[10], Banco_reg:BRE|Reg2[9],              ;
+;                             ;                                ; Banco_reg:BRE|Reg2[8], Banco_reg:BRE|Reg2[7], Banco_reg:BRE|Reg2[6],                ;
+;                             ;                                ; Banco_reg:BRE|Reg2[5], Banco_reg:BRE|Reg2[4], Banco_reg:BRE|Reg2[3],                ;
+;                             ;                                ; Banco_reg:BRE|Reg2[2], Banco_reg:BRE|Reg2[1], Banco_reg:BRE|Reg2[0],                ;
+;                             ;                                ; Banco_reg:BRE|Reg3[31], Banco_reg:BRE|Reg3[30], Banco_reg:BRE|Reg3[29],             ;
+;                             ;                                ; Banco_reg:BRE|Reg3[28], Banco_reg:BRE|Reg3[27], Banco_reg:BRE|Reg3[26],             ;
+;                             ;                                ; Banco_reg:BRE|Reg3[25], Banco_reg:BRE|Reg3[24], Banco_reg:BRE|Reg3[23],             ;
+;                             ;                                ; Banco_reg:BRE|Reg3[22], Banco_reg:BRE|Reg3[21], Banco_reg:BRE|Reg3[20],             ;
+;                             ;                                ; Banco_reg:BRE|Reg3[19], Banco_reg:BRE|Reg3[18], Banco_reg:BRE|Reg3[17],             ;
+;                             ;                                ; Banco_reg:BRE|Reg3[16], Banco_reg:BRE|Reg3[15], Banco_reg:BRE|Reg3[14],             ;
+;                             ;                                ; Banco_reg:BRE|Reg3[13], Banco_reg:BRE|Reg3[12], Banco_reg:BRE|Reg3[11],             ;
+;                             ;                                ; Banco_reg:BRE|Reg3[10], Banco_reg:BRE|Reg3[9], Banco_reg:BRE|Reg3[8],               ;
+;                             ;                                ; Banco_reg:BRE|Reg3[7], Banco_reg:BRE|Reg3[6], Banco_reg:BRE|Reg3[5],                ;
+;                             ;                                ; Banco_reg:BRE|Reg3[4], Banco_reg:BRE|Reg3[3], Banco_reg:BRE|Reg3[2],                ;
+;                             ;                                ; Banco_reg:BRE|Reg3[1], Banco_reg:BRE|Reg3[0], Banco_reg:BRE|Reg4[31],               ;
+;                             ;                                ; Banco_reg:BRE|Reg4[30], Banco_reg:BRE|Reg4[29], Banco_reg:BRE|Reg4[28],             ;
+;                             ;                                ; Banco_reg:BRE|Reg4[27], Banco_reg:BRE|Reg4[26], Banco_reg:BRE|Reg4[25],             ;
+;                             ;                                ; Banco_reg:BRE|Reg4[24], Banco_reg:BRE|Reg4[23], Banco_reg:BRE|Reg4[22],             ;
+;                             ;                                ; Banco_reg:BRE|Reg4[21], Banco_reg:BRE|Reg4[20], Banco_reg:BRE|Reg4[19],             ;
+;                             ;                                ; Banco_reg:BRE|Reg4[18], Banco_reg:BRE|Reg4[17], Banco_reg:BRE|Reg4[16],             ;
+;                             ;                                ; Banco_reg:BRE|Reg4[15], Banco_reg:BRE|Reg4[14], Banco_reg:BRE|Reg4[13],             ;
+;                             ;                                ; Banco_reg:BRE|Reg4[12], Banco_reg:BRE|Reg4[11], Banco_reg:BRE|Reg4[10],             ;
+;                             ;                                ; Banco_reg:BRE|Reg4[9], Banco_reg:BRE|Reg4[8], Banco_reg:BRE|Reg4[7],                ;
+;                             ;                                ; Banco_reg:BRE|Reg4[6], Banco_reg:BRE|Reg4[5], Banco_reg:BRE|Reg4[4],                ;
+;                             ;                                ; Banco_reg:BRE|Reg4[3], Banco_reg:BRE|Reg4[2], Banco_reg:BRE|Reg4[1],                ;
+;                             ;                                ; Banco_reg:BRE|Reg4[0], Banco_reg:BRE|Reg5[31], Banco_reg:BRE|Reg5[30],              ;
+;                             ;                                ; Banco_reg:BRE|Reg5[29], Banco_reg:BRE|Reg5[28], Banco_reg:BRE|Reg5[27],             ;
+;                             ;                                ; Banco_reg:BRE|Reg5[26], Banco_reg:BRE|Reg5[25], Banco_reg:BRE|Reg5[24],             ;
+;                             ;                                ; Banco_reg:BRE|Reg5[23], Banco_reg:BRE|Reg5[22], Banco_reg:BRE|Reg5[21],             ;
+;                             ;                                ; Banco_reg:BRE|Reg5[20], Banco_reg:BRE|Reg5[19], Banco_reg:BRE|Reg5[18],             ;
+;                             ;                                ; Banco_reg:BRE|Reg5[17], Banco_reg:BRE|Reg5[16], Banco_reg:BRE|Reg5[15],             ;
+;                             ;                                ; Banco_reg:BRE|Reg5[14], Banco_reg:BRE|Reg5[13], Banco_reg:BRE|Reg5[12],             ;
+;                             ;                                ; Banco_reg:BRE|Reg5[11], Banco_reg:BRE|Reg5[10], Banco_reg:BRE|Reg5[9],              ;
+;                             ;                                ; Banco_reg:BRE|Reg5[8], Banco_reg:BRE|Reg5[7], Banco_reg:BRE|Reg5[6],                ;
+;                             ;                                ; Banco_reg:BRE|Reg5[5], Banco_reg:BRE|Reg5[4], Banco_reg:BRE|Reg5[3],                ;
+;                             ;                                ; Banco_reg:BRE|Reg5[2], Banco_reg:BRE|Reg5[1], Banco_reg:BRE|Reg5[0],                ;
+;                             ;                                ; Banco_reg:BRE|Reg6[31], Banco_reg:BRE|Reg6[30], Banco_reg:BRE|Reg6[29],             ;
+;                             ;                                ; Banco_reg:BRE|Reg6[28], Banco_reg:BRE|Reg6[27], Banco_reg:BRE|Reg6[26],             ;
+;                             ;                                ; Banco_reg:BRE|Reg6[25], Banco_reg:BRE|Reg6[24], Banco_reg:BRE|Reg6[23],             ;
+;                             ;                                ; Banco_reg:BRE|Reg6[22], Banco_reg:BRE|Reg6[21], Banco_reg:BRE|Reg6[20],             ;
+;                             ;                                ; Banco_reg:BRE|Reg6[19], Banco_reg:BRE|Reg6[18], Banco_reg:BRE|Reg6[17],             ;
+;                             ;                                ; Banco_reg:BRE|Reg6[16], Banco_reg:BRE|Reg6[15], Banco_reg:BRE|Reg6[14],             ;
+;                             ;                                ; Banco_reg:BRE|Reg6[13], Banco_reg:BRE|Reg6[12], Banco_reg:BRE|Reg6[11],             ;
+;                             ;                                ; Banco_reg:BRE|Reg6[10], Banco_reg:BRE|Reg6[9], Banco_reg:BRE|Reg6[8],               ;
+;                             ;                                ; Banco_reg:BRE|Reg6[7], Banco_reg:BRE|Reg6[6], Banco_reg:BRE|Reg6[5],                ;
+;                             ;                                ; Banco_reg:BRE|Reg6[4], Banco_reg:BRE|Reg6[3], Banco_reg:BRE|Reg6[2],                ;
+;                             ;                                ; Banco_reg:BRE|Reg6[1], Banco_reg:BRE|Reg6[0], Banco_reg:BRE|Reg7[31],               ;
+;                             ;                                ; Banco_reg:BRE|Reg7[30], Banco_reg:BRE|Reg7[29], Banco_reg:BRE|Reg7[28],             ;
+;                             ;                                ; Banco_reg:BRE|Reg7[27], Banco_reg:BRE|Reg7[26], Banco_reg:BRE|Reg7[25],             ;
+;                             ;                                ; Banco_reg:BRE|Reg7[24], Banco_reg:BRE|Reg7[23], Banco_reg:BRE|Reg7[22],             ;
+;                             ;                                ; Banco_reg:BRE|Reg7[21], Banco_reg:BRE|Reg7[20], Banco_reg:BRE|Reg7[19],             ;
+;                             ;                                ; Banco_reg:BRE|Reg7[18], Banco_reg:BRE|Reg7[17], Banco_reg:BRE|Reg7[16],             ;
+;                             ;                                ; Banco_reg:BRE|Reg7[15], Banco_reg:BRE|Reg7[14], Banco_reg:BRE|Reg7[13],             ;
+;                             ;                                ; Banco_reg:BRE|Reg7[12], Banco_reg:BRE|Reg7[11], Banco_reg:BRE|Reg7[10],             ;
+;                             ;                                ; Banco_reg:BRE|Reg7[9], Banco_reg:BRE|Reg7[8], Banco_reg:BRE|Reg7[7],                ;
+;                             ;                                ; Banco_reg:BRE|Reg7[6], Banco_reg:BRE|Reg7[5], Banco_reg:BRE|Reg7[4],                ;
+;                             ;                                ; Banco_reg:BRE|Reg7[3], Banco_reg:BRE|Reg7[2], Banco_reg:BRE|Reg7[1],                ;
+;                             ;                                ; Banco_reg:BRE|Reg7[0], Banco_reg:BRE|Reg8[31], Banco_reg:BRE|Reg8[30],              ;
+;                             ;                                ; Banco_reg:BRE|Reg8[29], Banco_reg:BRE|Reg8[28], Banco_reg:BRE|Reg8[27],             ;
+;                             ;                                ; Banco_reg:BRE|Reg8[26], Banco_reg:BRE|Reg8[25], Banco_reg:BRE|Reg8[24],             ;
+;                             ;                                ; Banco_reg:BRE|Reg8[23], Banco_reg:BRE|Reg8[22], Banco_reg:BRE|Reg8[21],             ;
+;                             ;                                ; Banco_reg:BRE|Reg8[20], Banco_reg:BRE|Reg8[19], Banco_reg:BRE|Reg8[18],             ;
+;                             ;                                ; Banco_reg:BRE|Reg8[17], Banco_reg:BRE|Reg8[16], Banco_reg:BRE|Reg8[15],             ;
+;                             ;                                ; Banco_reg:BRE|Reg8[14], Banco_reg:BRE|Reg8[13], Banco_reg:BRE|Reg8[12],             ;
+;                             ;                                ; Banco_reg:BRE|Reg8[11], Banco_reg:BRE|Reg8[10], Banco_reg:BRE|Reg8[9],              ;
+;                             ;                                ; Banco_reg:BRE|Reg8[8], Banco_reg:BRE|Reg8[7], Banco_reg:BRE|Reg8[6],                ;
+;                             ;                                ; Banco_reg:BRE|Reg8[5], Banco_reg:BRE|Reg8[4], Banco_reg:BRE|Reg8[3],                ;
+;                             ;                                ; Banco_reg:BRE|Reg8[2], Banco_reg:BRE|Reg8[1], Banco_reg:BRE|Reg8[0],                ;
+;                             ;                                ; Banco_reg:BRE|Reg9[31], Banco_reg:BRE|Reg9[30], Banco_reg:BRE|Reg9[29],             ;
+;                             ;                                ; Banco_reg:BRE|Reg9[28], Banco_reg:BRE|Reg9[27], Banco_reg:BRE|Reg9[26],             ;
+;                             ;                                ; Banco_reg:BRE|Reg9[25], Banco_reg:BRE|Reg9[24], Banco_reg:BRE|Reg9[23],             ;
+;                             ;                                ; Banco_reg:BRE|Reg9[22], Banco_reg:BRE|Reg9[21], Banco_reg:BRE|Reg9[20],             ;
+;                             ;                                ; Banco_reg:BRE|Reg9[19], Banco_reg:BRE|Reg9[18], Banco_reg:BRE|Reg9[17],             ;
+;                             ;                                ; Banco_reg:BRE|Reg9[16], Banco_reg:BRE|Reg9[15], Banco_reg:BRE|Reg9[14],             ;
+;                             ;                                ; Banco_reg:BRE|Reg9[13], Banco_reg:BRE|Reg9[12], Banco_reg:BRE|Reg9[11],             ;
+;                             ;                                ; Banco_reg:BRE|Reg9[10], Banco_reg:BRE|Reg9[9], Banco_reg:BRE|Reg9[8],               ;
+;                             ;                                ; Banco_reg:BRE|Reg9[7], Banco_reg:BRE|Reg9[6], Banco_reg:BRE|Reg9[5],                ;
+;                             ;                                ; Banco_reg:BRE|Reg9[4], Banco_reg:BRE|Reg9[3], Banco_reg:BRE|Reg9[2],                ;
+;                             ;                                ; Banco_reg:BRE|Reg9[1], Banco_reg:BRE|Reg9[0], Banco_reg:BRE|Reg10[31],              ;
+;                             ;                                ; Banco_reg:BRE|Reg10[30], Banco_reg:BRE|Reg10[29], Banco_reg:BRE|Reg10[28],          ;
+;                             ;                                ; Banco_reg:BRE|Reg10[27], Banco_reg:BRE|Reg10[26], Banco_reg:BRE|Reg10[25],          ;
+;                             ;                                ; Banco_reg:BRE|Reg10[24], Banco_reg:BRE|Reg10[23], Banco_reg:BRE|Reg10[22],          ;
+;                             ;                                ; Banco_reg:BRE|Reg10[21], Banco_reg:BRE|Reg10[20], Banco_reg:BRE|Reg10[19],          ;
+;                             ;                                ; Banco_reg:BRE|Reg10[18], Banco_reg:BRE|Reg10[17], Banco_reg:BRE|Reg10[16],          ;
+;                             ;                                ; Banco_reg:BRE|Reg10[15], Banco_reg:BRE|Reg10[14], Banco_reg:BRE|Reg10[13],          ;
+;                             ;                                ; Banco_reg:BRE|Reg10[12], Banco_reg:BRE|Reg10[11], Banco_reg:BRE|Reg10[10],          ;
+;                             ;                                ; Banco_reg:BRE|Reg10[9], Banco_reg:BRE|Reg10[8], Banco_reg:BRE|Reg10[7],             ;
+;                             ;                                ; Banco_reg:BRE|Reg10[6], Banco_reg:BRE|Reg10[5], Banco_reg:BRE|Reg10[4],             ;
+;                             ;                                ; Banco_reg:BRE|Reg10[3], Banco_reg:BRE|Reg10[2], Banco_reg:BRE|Reg10[1],             ;
+;                             ;                                ; Banco_reg:BRE|Reg10[0], Banco_reg:BRE|Reg11[31], Banco_reg:BRE|Reg11[30],           ;
+;                             ;                                ; Banco_reg:BRE|Reg11[29], Banco_reg:BRE|Reg11[28], Banco_reg:BRE|Reg11[27],          ;
+;                             ;                                ; Banco_reg:BRE|Reg11[26], Banco_reg:BRE|Reg11[25], Banco_reg:BRE|Reg11[24],          ;
+;                             ;                                ; Banco_reg:BRE|Reg11[23], Banco_reg:BRE|Reg11[22], Banco_reg:BRE|Reg11[21],          ;
+;                             ;                                ; Banco_reg:BRE|Reg11[20], Banco_reg:BRE|Reg11[19], Banco_reg:BRE|Reg11[18],          ;
+;                             ;                                ; Banco_reg:BRE|Reg11[17], Banco_reg:BRE|Reg11[16], Banco_reg:BRE|Reg11[15],          ;
+;                             ;                                ; Banco_reg:BRE|Reg11[14], Banco_reg:BRE|Reg11[13], Banco_reg:BRE|Reg11[12],          ;
+;                             ;                                ; Banco_reg:BRE|Reg11[11], Banco_reg:BRE|Reg11[10], Banco_reg:BRE|Reg11[9],           ;
+;                             ;                                ; Banco_reg:BRE|Reg11[8], Banco_reg:BRE|Reg11[7], Banco_reg:BRE|Reg11[6],             ;
+;                             ;                                ; Banco_reg:BRE|Reg11[5], Banco_reg:BRE|Reg11[4], Banco_reg:BRE|Reg11[3],             ;
+;                             ;                                ; Banco_reg:BRE|Reg11[2], Banco_reg:BRE|Reg11[1], Banco_reg:BRE|Reg11[0],             ;
+;                             ;                                ; Banco_reg:BRE|Reg12[31], Banco_reg:BRE|Reg12[30], Banco_reg:BRE|Reg12[29],          ;
+;                             ;                                ; Banco_reg:BRE|Reg12[28], Banco_reg:BRE|Reg12[27], Banco_reg:BRE|Reg12[26],          ;
+;                             ;                                ; Banco_reg:BRE|Reg12[25], Banco_reg:BRE|Reg12[24], Banco_reg:BRE|Reg12[23],          ;
+;                             ;                                ; Banco_reg:BRE|Reg12[22], Banco_reg:BRE|Reg12[21], Banco_reg:BRE|Reg12[20],          ;
+;                             ;                                ; Banco_reg:BRE|Reg12[19], Banco_reg:BRE|Reg12[18], Banco_reg:BRE|Reg12[17],          ;
+;                             ;                                ; Banco_reg:BRE|Reg12[16], Banco_reg:BRE|Reg12[15], Banco_reg:BRE|Reg12[14],          ;
+;                             ;                                ; Banco_reg:BRE|Reg12[13], Banco_reg:BRE|Reg12[12], Banco_reg:BRE|Reg12[11],          ;
+;                             ;                                ; Banco_reg:BRE|Reg12[10], Banco_reg:BRE|Reg12[9], Banco_reg:BRE|Reg12[8],            ;
+;                             ;                                ; Banco_reg:BRE|Reg12[7], Banco_reg:BRE|Reg12[6], Banco_reg:BRE|Reg12[5],             ;
+;                             ;                                ; Banco_reg:BRE|Reg12[4], Banco_reg:BRE|Reg12[3], Banco_reg:BRE|Reg12[2],             ;
+;                             ;                                ; Banco_reg:BRE|Reg12[1], Banco_reg:BRE|Reg12[0], Banco_reg:BRE|Reg13[31],            ;
+;                             ;                                ; Banco_reg:BRE|Reg13[30], Banco_reg:BRE|Reg13[29], Banco_reg:BRE|Reg13[28],          ;
+;                             ;                                ; Banco_reg:BRE|Reg13[27], Banco_reg:BRE|Reg13[26], Banco_reg:BRE|Reg13[25],          ;
+;                             ;                                ; Banco_reg:BRE|Reg13[24], Banco_reg:BRE|Reg13[23], Banco_reg:BRE|Reg13[22],          ;
+;                             ;                                ; Banco_reg:BRE|Reg13[21], Banco_reg:BRE|Reg13[20], Banco_reg:BRE|Reg13[19],          ;
+;                             ;                                ; Banco_reg:BRE|Reg13[18], Banco_reg:BRE|Reg13[17], Banco_reg:BRE|Reg13[16],          ;
+;                             ;                                ; Banco_reg:BRE|Reg13[15], Banco_reg:BRE|Reg13[14], Banco_reg:BRE|Reg13[13],          ;
+;                             ;                                ; Banco_reg:BRE|Reg13[12], Banco_reg:BRE|Reg13[11], Banco_reg:BRE|Reg13[10],          ;
+;                             ;                                ; Banco_reg:BRE|Reg13[9], Banco_reg:BRE|Reg13[8], Banco_reg:BRE|Reg13[7],             ;
+;                             ;                                ; Banco_reg:BRE|Reg13[6], Banco_reg:BRE|Reg13[5], Banco_reg:BRE|Reg13[4],             ;
+;                             ;                                ; Banco_reg:BRE|Reg13[3], Banco_reg:BRE|Reg13[2], Banco_reg:BRE|Reg13[1],             ;
+;                             ;                                ; Banco_reg:BRE|Reg13[0], Banco_reg:BRE|Reg14[31], Banco_reg:BRE|Reg14[30],           ;
+;                             ;                                ; Banco_reg:BRE|Reg14[29], Banco_reg:BRE|Reg14[28], Banco_reg:BRE|Reg14[27],          ;
+;                             ;                                ; Banco_reg:BRE|Reg14[26], Banco_reg:BRE|Reg14[25], Banco_reg:BRE|Reg14[24],          ;
+;                             ;                                ; Banco_reg:BRE|Reg14[23], Banco_reg:BRE|Reg14[22], Banco_reg:BRE|Reg14[21],          ;
+;                             ;                                ; Banco_reg:BRE|Reg14[20], Banco_reg:BRE|Reg14[19], Banco_reg:BRE|Reg14[18],          ;
+;                             ;                                ; Banco_reg:BRE|Reg14[17], Banco_reg:BRE|Reg14[16], Banco_reg:BRE|Reg14[15],          ;
+;                             ;                                ; Banco_reg:BRE|Reg14[14], Banco_reg:BRE|Reg14[13], Banco_reg:BRE|Reg14[12],          ;
+;                             ;                                ; Banco_reg:BRE|Reg14[11], Banco_reg:BRE|Reg14[10], Banco_reg:BRE|Reg14[9],           ;
+;                             ;                                ; Banco_reg:BRE|Reg14[8], Banco_reg:BRE|Reg14[7], Banco_reg:BRE|Reg14[6],             ;
+;                             ;                                ; Banco_reg:BRE|Reg14[5], Banco_reg:BRE|Reg14[4], Banco_reg:BRE|Reg14[3],             ;
+;                             ;                                ; Banco_reg:BRE|Reg14[2], Banco_reg:BRE|Reg14[1], Banco_reg:BRE|Reg14[0],             ;
+;                             ;                                ; Banco_reg:BRE|Reg15[31], Banco_reg:BRE|Reg15[30], Banco_reg:BRE|Reg15[29],          ;
+;                             ;                                ; Banco_reg:BRE|Reg15[28], Banco_reg:BRE|Reg15[27], Banco_reg:BRE|Reg15[26],          ;
+;                             ;                                ; Banco_reg:BRE|Reg15[25], Banco_reg:BRE|Reg15[24], Banco_reg:BRE|Reg15[23],          ;
+;                             ;                                ; Banco_reg:BRE|Reg15[22], Banco_reg:BRE|Reg15[21], Banco_reg:BRE|Reg15[20],          ;
+;                             ;                                ; Banco_reg:BRE|Reg15[19], Banco_reg:BRE|Reg15[18], Banco_reg:BRE|Reg15[17],          ;
+;                             ;                                ; Banco_reg:BRE|Reg15[16], Banco_reg:BRE|Reg15[15], Banco_reg:BRE|Reg15[14],          ;
+;                             ;                                ; Banco_reg:BRE|Reg15[13], Banco_reg:BRE|Reg15[12], Banco_reg:BRE|Reg15[11],          ;
+;                             ;                                ; Banco_reg:BRE|Reg15[10], Banco_reg:BRE|Reg15[9], Banco_reg:BRE|Reg15[8],            ;
+;                             ;                                ; Banco_reg:BRE|Reg15[7], Banco_reg:BRE|Reg15[6], Banco_reg:BRE|Reg15[5],             ;
+;                             ;                                ; Banco_reg:BRE|Reg15[4], Banco_reg:BRE|Reg15[3], Banco_reg:BRE|Reg15[2],             ;
+;                             ;                                ; Banco_reg:BRE|Reg15[1], Banco_reg:BRE|Reg15[0], Banco_reg:BRE|Reg16[31],            ;
+;                             ;                                ; Banco_reg:BRE|Reg16[30], Banco_reg:BRE|Reg16[29], Banco_reg:BRE|Reg16[28],          ;
+;                             ;                                ; Banco_reg:BRE|Reg16[27], Banco_reg:BRE|Reg16[26], Banco_reg:BRE|Reg16[25],          ;
+;                             ;                                ; Banco_reg:BRE|Reg16[24], Banco_reg:BRE|Reg16[23], Banco_reg:BRE|Reg16[22],          ;
+;                             ;                                ; Banco_reg:BRE|Reg16[21], Banco_reg:BRE|Reg16[20], Banco_reg:BRE|Reg16[19],          ;
+;                             ;                                ; Banco_reg:BRE|Reg16[18], Banco_reg:BRE|Reg16[17], Banco_reg:BRE|Reg16[16],          ;
+;                             ;                                ; Banco_reg:BRE|Reg16[15], Banco_reg:BRE|Reg16[14], Banco_reg:BRE|Reg16[13],          ;
+;                             ;                                ; Banco_reg:BRE|Reg16[12], Banco_reg:BRE|Reg16[11], Banco_reg:BRE|Reg16[10],          ;
+;                             ;                                ; Banco_reg:BRE|Reg16[9], Banco_reg:BRE|Reg16[8], Banco_reg:BRE|Reg16[7],             ;
+;                             ;                                ; Banco_reg:BRE|Reg16[6], Banco_reg:BRE|Reg16[5], Banco_reg:BRE|Reg16[4],             ;
+;                             ;                                ; Banco_reg:BRE|Reg16[3], Banco_reg:BRE|Reg16[2], Banco_reg:BRE|Reg16[1],             ;
+;                             ;                                ; Banco_reg:BRE|Reg16[0], Banco_reg:BRE|Reg17[31], Banco_reg:BRE|Reg17[30],           ;
+;                             ;                                ; Banco_reg:BRE|Reg17[29], Banco_reg:BRE|Reg17[28], Banco_reg:BRE|Reg17[27],          ;
+;                             ;                                ; Banco_reg:BRE|Reg17[26], Banco_reg:BRE|Reg17[25], Banco_reg:BRE|Reg17[24],          ;
+;                             ;                                ; Banco_reg:BRE|Reg17[23], Banco_reg:BRE|Reg17[22], Banco_reg:BRE|Reg17[21],          ;
+;                             ;                                ; Banco_reg:BRE|Reg17[20], Banco_reg:BRE|Reg17[19], Banco_reg:BRE|Reg17[18],          ;
+;                             ;                                ; Banco_reg:BRE|Reg17[17], Banco_reg:BRE|Reg17[16], Banco_reg:BRE|Reg17[15],          ;
+;                             ;                                ; Banco_reg:BRE|Reg17[14], Banco_reg:BRE|Reg17[13], Banco_reg:BRE|Reg17[12],          ;
+;                             ;                                ; Banco_reg:BRE|Reg17[11], Banco_reg:BRE|Reg17[10], Banco_reg:BRE|Reg17[9],           ;
+;                             ;                                ; Banco_reg:BRE|Reg17[8], Banco_reg:BRE|Reg17[7], Banco_reg:BRE|Reg17[6],             ;
+;                             ;                                ; Banco_reg:BRE|Reg17[5], Banco_reg:BRE|Reg17[4], Banco_reg:BRE|Reg17[3],             ;
+;                             ;                                ; Banco_reg:BRE|Reg17[2], Banco_reg:BRE|Reg17[1], Banco_reg:BRE|Reg17[0],             ;
+;                             ;                                ; Banco_reg:BRE|Reg18[31], Banco_reg:BRE|Reg18[30], Banco_reg:BRE|Reg18[29],          ;
+;                             ;                                ; Banco_reg:BRE|Reg18[28], Banco_reg:BRE|Reg18[27], Banco_reg:BRE|Reg18[26],          ;
+;                             ;                                ; Banco_reg:BRE|Reg18[25], Banco_reg:BRE|Reg18[24], Banco_reg:BRE|Reg18[23],          ;
+;                             ;                                ; Banco_reg:BRE|Reg18[22], Banco_reg:BRE|Reg18[21], Banco_reg:BRE|Reg18[20],          ;
+;                             ;                                ; Banco_reg:BRE|Reg18[19], Banco_reg:BRE|Reg18[18], Banco_reg:BRE|Reg18[17],          ;
+;                             ;                                ; Banco_reg:BRE|Reg18[16], Banco_reg:BRE|Reg18[15], Banco_reg:BRE|Reg18[14],          ;
+;                             ;                                ; Banco_reg:BRE|Reg18[13], Banco_reg:BRE|Reg18[12], Banco_reg:BRE|Reg18[11],          ;
+;                             ;                                ; Banco_reg:BRE|Reg18[10], Banco_reg:BRE|Reg18[9], Banco_reg:BRE|Reg18[8],            ;
+;                             ;                                ; Banco_reg:BRE|Reg18[7], Banco_reg:BRE|Reg18[6], Banco_reg:BRE|Reg18[5],             ;
+;                             ;                                ; Banco_reg:BRE|Reg18[4], Banco_reg:BRE|Reg18[3], Banco_reg:BRE|Reg18[2],             ;
+;                             ;                                ; Banco_reg:BRE|Reg18[1], Banco_reg:BRE|Reg18[0], Banco_reg:BRE|Reg19[31],            ;
+;                             ;                                ; Banco_reg:BRE|Reg19[30], Banco_reg:BRE|Reg19[29], Banco_reg:BRE|Reg19[28],          ;
+;                             ;                                ; Banco_reg:BRE|Reg19[27], Banco_reg:BRE|Reg19[26], Banco_reg:BRE|Reg19[25],          ;
+;                             ;                                ; Banco_reg:BRE|Reg19[24], Banco_reg:BRE|Reg19[23], Banco_reg:BRE|Reg19[22],          ;
+;                             ;                                ; Banco_reg:BRE|Reg19[21], Banco_reg:BRE|Reg19[20], Banco_reg:BRE|Reg19[19],          ;
+;                             ;                                ; Banco_reg:BRE|Reg19[18], Banco_reg:BRE|Reg19[17], Banco_reg:BRE|Reg19[16],          ;
+;                             ;                                ; Banco_reg:BRE|Reg19[15], Banco_reg:BRE|Reg19[14], Banco_reg:BRE|Reg19[13],          ;
+;                             ;                                ; Banco_reg:BRE|Reg19[12], Banco_reg:BRE|Reg19[11], Banco_reg:BRE|Reg19[10],          ;
+;                             ;                                ; Banco_reg:BRE|Reg19[9], Banco_reg:BRE|Reg19[8], Banco_reg:BRE|Reg19[7],             ;
+;                             ;                                ; Banco_reg:BRE|Reg19[6], Banco_reg:BRE|Reg19[5], Banco_reg:BRE|Reg19[4],             ;
+;                             ;                                ; Banco_reg:BRE|Reg19[3], Banco_reg:BRE|Reg19[2], Banco_reg:BRE|Reg19[1],             ;
+;                             ;                                ; Banco_reg:BRE|Reg19[0], Banco_reg:BRE|Reg20[31], Banco_reg:BRE|Reg20[30],           ;
+;                             ;                                ; Banco_reg:BRE|Reg20[29], Banco_reg:BRE|Reg20[28], Banco_reg:BRE|Reg20[27],          ;
+;                             ;                                ; Banco_reg:BRE|Reg20[26], Banco_reg:BRE|Reg20[25], Banco_reg:BRE|Reg20[24],          ;
+;                             ;                                ; Banco_reg:BRE|Reg20[23], Banco_reg:BRE|Reg20[22], Banco_reg:BRE|Reg20[21],          ;
+;                             ;                                ; Banco_reg:BRE|Reg20[20], Banco_reg:BRE|Reg20[19], Banco_reg:BRE|Reg20[18],          ;
+;                             ;                                ; Banco_reg:BRE|Reg20[17], Banco_reg:BRE|Reg20[16], Banco_reg:BRE|Reg20[15],          ;
+;                             ;                                ; Banco_reg:BRE|Reg20[14], Banco_reg:BRE|Reg20[13], Banco_reg:BRE|Reg20[12],          ;
+;                             ;                                ; Banco_reg:BRE|Reg20[11], Banco_reg:BRE|Reg20[10], Banco_reg:BRE|Reg20[9],           ;
+;                             ;                                ; Banco_reg:BRE|Reg20[8], Banco_reg:BRE|Reg20[7], Banco_reg:BRE|Reg20[6],             ;
+;                             ;                                ; Banco_reg:BRE|Reg20[5], Banco_reg:BRE|Reg20[4], Banco_reg:BRE|Reg20[3],             ;
+;                             ;                                ; Banco_reg:BRE|Reg20[2], Banco_reg:BRE|Reg20[1], Banco_reg:BRE|Reg20[0],             ;
+;                             ;                                ; Banco_reg:BRE|Reg21[31], Banco_reg:BRE|Reg21[30], Banco_reg:BRE|Reg21[29],          ;
+;                             ;                                ; Banco_reg:BRE|Reg21[28], Banco_reg:BRE|Reg21[27], Banco_reg:BRE|Reg21[26],          ;
+;                             ;                                ; Banco_reg:BRE|Reg21[25], Banco_reg:BRE|Reg21[24], Banco_reg:BRE|Reg21[23],          ;
+;                             ;                                ; Banco_reg:BRE|Reg21[22], Banco_reg:BRE|Reg21[21], Banco_reg:BRE|Reg21[20],          ;
+;                             ;                                ; Banco_reg:BRE|Reg21[19], Banco_reg:BRE|Reg21[18], Banco_reg:BRE|Reg21[17],          ;
+;                             ;                                ; Banco_reg:BRE|Reg21[16], Banco_reg:BRE|Reg21[15], Banco_reg:BRE|Reg21[14],          ;
+;                             ;                                ; Banco_reg:BRE|Reg21[13], Banco_reg:BRE|Reg21[12], Banco_reg:BRE|Reg21[11],          ;
+;                             ;                                ; Banco_reg:BRE|Reg21[10], Banco_reg:BRE|Reg21[9], Banco_reg:BRE|Reg21[8],            ;
+;                             ;                                ; Banco_reg:BRE|Reg21[7], Banco_reg:BRE|Reg21[6], Banco_reg:BRE|Reg21[5],             ;
+;                             ;                                ; Banco_reg:BRE|Reg21[4], Banco_reg:BRE|Reg21[3], Banco_reg:BRE|Reg21[2],             ;
+;                             ;                                ; Banco_reg:BRE|Reg21[1], Banco_reg:BRE|Reg21[0], Banco_reg:BRE|Reg22[31],            ;
+;                             ;                                ; Banco_reg:BRE|Reg22[30], Banco_reg:BRE|Reg22[29], Banco_reg:BRE|Reg22[28],          ;
+;                             ;                                ; Banco_reg:BRE|Reg22[27], Banco_reg:BRE|Reg22[26], Banco_reg:BRE|Reg22[25],          ;
+;                             ;                                ; Banco_reg:BRE|Reg22[24], Banco_reg:BRE|Reg22[23], Banco_reg:BRE|Reg22[22],          ;
+;                             ;                                ; Banco_reg:BRE|Reg22[21], Banco_reg:BRE|Reg22[20], Banco_reg:BRE|Reg22[19],          ;
+;                             ;                                ; Banco_reg:BRE|Reg22[18], Banco_reg:BRE|Reg22[17], Banco_reg:BRE|Reg22[16],          ;
+;                             ;                                ; Banco_reg:BRE|Reg22[15], Banco_reg:BRE|Reg22[14], Banco_reg:BRE|Reg22[13],          ;
+;                             ;                                ; Banco_reg:BRE|Reg22[12], Banco_reg:BRE|Reg22[11], Banco_reg:BRE|Reg22[10],          ;
+;                             ;                                ; Banco_reg:BRE|Reg22[9], Banco_reg:BRE|Reg22[8], Banco_reg:BRE|Reg22[7],             ;
+;                             ;                                ; Banco_reg:BRE|Reg22[6], Banco_reg:BRE|Reg22[5], Banco_reg:BRE|Reg22[4],             ;
+;                             ;                                ; Banco_reg:BRE|Reg22[3], Banco_reg:BRE|Reg22[2], Banco_reg:BRE|Reg22[1],             ;
+;                             ;                                ; Banco_reg:BRE|Reg22[0], Banco_reg:BRE|Reg23[31], Banco_reg:BRE|Reg23[30],           ;
+;                             ;                                ; Banco_reg:BRE|Reg23[29], Banco_reg:BRE|Reg23[28], Banco_reg:BRE|Reg23[27],          ;
+;                             ;                                ; Banco_reg:BRE|Reg23[26], Banco_reg:BRE|Reg23[25], Banco_reg:BRE|Reg23[24],          ;
+;                             ;                                ; Banco_reg:BRE|Reg23[23], Banco_reg:BRE|Reg23[22], Banco_reg:BRE|Reg23[21],          ;
+;                             ;                                ; Banco_reg:BRE|Reg23[20], Banco_reg:BRE|Reg23[19], Banco_reg:BRE|Reg23[18],          ;
+;                             ;                                ; Banco_reg:BRE|Reg23[17], Banco_reg:BRE|Reg23[16], Banco_reg:BRE|Reg23[15],          ;
+;                             ;                                ; Banco_reg:BRE|Reg23[14], Banco_reg:BRE|Reg23[13], Banco_reg:BRE|Reg23[12],          ;
+;                             ;                                ; Banco_reg:BRE|Reg23[11], Banco_reg:BRE|Reg23[10], Banco_reg:BRE|Reg23[9],           ;
+;                             ;                                ; Banco_reg:BRE|Reg23[8], Banco_reg:BRE|Reg23[7], Banco_reg:BRE|Reg23[6],             ;
+;                             ;                                ; Banco_reg:BRE|Reg23[5], Banco_reg:BRE|Reg23[4], Banco_reg:BRE|Reg23[3],             ;
+;                             ;                                ; Banco_reg:BRE|Reg23[2], Banco_reg:BRE|Reg23[1], Banco_reg:BRE|Reg23[0],             ;
+;                             ;                                ; Banco_reg:BRE|Reg24[31], Banco_reg:BRE|Reg24[30], Banco_reg:BRE|Reg24[29],          ;
+;                             ;                                ; Banco_reg:BRE|Reg24[28], Banco_reg:BRE|Reg24[27], Banco_reg:BRE|Reg24[26],          ;
+;                             ;                                ; Banco_reg:BRE|Reg24[25], Banco_reg:BRE|Reg24[24], Banco_reg:BRE|Reg24[23],          ;
+;                             ;                                ; Banco_reg:BRE|Reg24[22], Banco_reg:BRE|Reg24[21], Banco_reg:BRE|Reg24[20],          ;
+;                             ;                                ; Banco_reg:BRE|Reg24[19], Banco_reg:BRE|Reg24[18], Banco_reg:BRE|Reg24[17],          ;
+;                             ;                                ; Banco_reg:BRE|Reg24[16], Banco_reg:BRE|Reg24[15], Banco_reg:BRE|Reg24[14],          ;
+;                             ;                                ; Banco_reg:BRE|Reg24[13], Banco_reg:BRE|Reg24[12], Banco_reg:BRE|Reg24[11],          ;
+;                             ;                                ; Banco_reg:BRE|Reg24[10], Banco_reg:BRE|Reg24[9], Banco_reg:BRE|Reg24[8],            ;
+;                             ;                                ; Banco_reg:BRE|Reg24[7], Banco_reg:BRE|Reg24[6], Banco_reg:BRE|Reg24[5],             ;
+;                             ;                                ; Banco_reg:BRE|Reg24[4], Banco_reg:BRE|Reg24[3], Banco_reg:BRE|Reg24[2],             ;
+;                             ;                                ; Banco_reg:BRE|Reg24[1], Banco_reg:BRE|Reg24[0], Banco_reg:BRE|Reg25[31],            ;
+;                             ;                                ; Banco_reg:BRE|Reg25[30], Banco_reg:BRE|Reg25[29], Banco_reg:BRE|Reg25[28],          ;
+;                             ;                                ; Banco_reg:BRE|Reg25[27], Banco_reg:BRE|Reg25[26], Banco_reg:BRE|Reg25[25],          ;
+;                             ;                                ; Banco_reg:BRE|Reg25[24], Banco_reg:BRE|Reg25[23], Banco_reg:BRE|Reg25[22],          ;
+;                             ;                                ; Banco_reg:BRE|Reg25[21], Banco_reg:BRE|Reg25[20], Banco_reg:BRE|Reg25[19],          ;
+;                             ;                                ; Banco_reg:BRE|Reg25[18], Banco_reg:BRE|Reg25[17], Banco_reg:BRE|Reg25[16],          ;
+;                             ;                                ; Banco_reg:BRE|Reg25[15], Banco_reg:BRE|Reg25[14], Banco_reg:BRE|Reg25[13],          ;
+;                             ;                                ; Banco_reg:BRE|Reg25[12], Banco_reg:BRE|Reg25[11], Banco_reg:BRE|Reg25[10],          ;
+;                             ;                                ; Banco_reg:BRE|Reg25[9], Banco_reg:BRE|Reg25[8], Banco_reg:BRE|Reg25[7],             ;
+;                             ;                                ; Banco_reg:BRE|Reg25[6], Banco_reg:BRE|Reg25[5], Banco_reg:BRE|Reg25[4],             ;
+;                             ;                                ; Banco_reg:BRE|Reg25[3], Banco_reg:BRE|Reg25[2], Banco_reg:BRE|Reg25[1],             ;
+;                             ;                                ; Banco_reg:BRE|Reg25[0], Banco_reg:BRE|Reg26[31], Banco_reg:BRE|Reg26[30],           ;
+;                             ;                                ; Banco_reg:BRE|Reg26[29], Banco_reg:BRE|Reg26[28], Banco_reg:BRE|Reg26[27],          ;
+;                             ;                                ; Banco_reg:BRE|Reg26[26], Banco_reg:BRE|Reg26[25], Banco_reg:BRE|Reg26[24],          ;
+;                             ;                                ; Banco_reg:BRE|Reg26[23], Banco_reg:BRE|Reg26[22], Banco_reg:BRE|Reg26[21],          ;
+;                             ;                                ; Banco_reg:BRE|Reg26[20], Banco_reg:BRE|Reg26[19], Banco_reg:BRE|Reg26[18],          ;
+;                             ;                                ; Banco_reg:BRE|Reg26[17], Banco_reg:BRE|Reg26[16], Banco_reg:BRE|Reg26[15],          ;
+;                             ;                                ; Banco_reg:BRE|Reg26[14], Banco_reg:BRE|Reg26[13], Banco_reg:BRE|Reg26[12],          ;
+;                             ;                                ; Banco_reg:BRE|Reg26[11], Banco_reg:BRE|Reg26[10], Banco_reg:BRE|Reg26[9],           ;
+;                             ;                                ; Banco_reg:BRE|Reg26[8], Banco_reg:BRE|Reg26[7], Banco_reg:BRE|Reg26[6],             ;
+;                             ;                                ; Banco_reg:BRE|Reg26[5], Banco_reg:BRE|Reg26[4], Banco_reg:BRE|Reg26[3],             ;
+;                             ;                                ; Banco_reg:BRE|Reg26[2], Banco_reg:BRE|Reg26[1], Banco_reg:BRE|Reg26[0],             ;
+;                             ;                                ; Banco_reg:BRE|Reg27[31], Banco_reg:BRE|Reg27[30], Banco_reg:BRE|Reg27[29],          ;
+;                             ;                                ; Banco_reg:BRE|Reg27[28], Banco_reg:BRE|Reg27[27], Banco_reg:BRE|Reg27[26],          ;
+;                             ;                                ; Banco_reg:BRE|Reg27[25], Banco_reg:BRE|Reg27[24], Banco_reg:BRE|Reg27[23],          ;
+;                             ;                                ; Banco_reg:BRE|Reg27[22], Banco_reg:BRE|Reg27[21], Banco_reg:BRE|Reg27[20],          ;
+;                             ;                                ; Banco_reg:BRE|Reg27[19], Banco_reg:BRE|Reg27[18], Banco_reg:BRE|Reg27[17],          ;
+;                             ;                                ; Banco_reg:BRE|Reg27[16], Banco_reg:BRE|Reg27[15], Banco_reg:BRE|Reg27[14],          ;
+;                             ;                                ; Banco_reg:BRE|Reg27[13], Banco_reg:BRE|Reg27[12], Banco_reg:BRE|Reg27[11],          ;
+;                             ;                                ; Banco_reg:BRE|Reg27[10], Banco_reg:BRE|Reg27[9], Banco_reg:BRE|Reg27[8],            ;
+;                             ;                                ; Banco_reg:BRE|Reg27[7], Banco_reg:BRE|Reg27[6], Banco_reg:BRE|Reg27[5],             ;
+;                             ;                                ; Banco_reg:BRE|Reg27[4], Banco_reg:BRE|Reg27[3], Banco_reg:BRE|Reg27[2],             ;
+;                             ;                                ; Banco_reg:BRE|Reg27[1], Banco_reg:BRE|Reg27[0], Banco_reg:BRE|Reg28[31],            ;
+;                             ;                                ; Banco_reg:BRE|Reg28[30], Banco_reg:BRE|Reg28[29], Banco_reg:BRE|Reg28[28],          ;
+;                             ;                                ; Banco_reg:BRE|Reg28[27], Banco_reg:BRE|Reg28[26], Banco_reg:BRE|Reg28[25],          ;
+;                             ;                                ; Banco_reg:BRE|Reg28[24], Banco_reg:BRE|Reg28[23], Banco_reg:BRE|Reg28[22],          ;
+;                             ;                                ; Banco_reg:BRE|Reg28[21], Banco_reg:BRE|Reg28[20], Banco_reg:BRE|Reg28[19],          ;
+;                             ;                                ; Banco_reg:BRE|Reg28[18], Banco_reg:BRE|Reg28[17], Banco_reg:BRE|Reg28[16],          ;
+;                             ;                                ; Banco_reg:BRE|Reg28[15], Banco_reg:BRE|Reg28[14], Banco_reg:BRE|Reg28[13],          ;
+;                             ;                                ; Banco_reg:BRE|Reg28[12], Banco_reg:BRE|Reg28[11], Banco_reg:BRE|Reg28[10],          ;
+;                             ;                                ; Banco_reg:BRE|Reg28[9], Banco_reg:BRE|Reg28[8], Banco_reg:BRE|Reg28[7],             ;
+;                             ;                                ; Banco_reg:BRE|Reg28[6], Banco_reg:BRE|Reg28[5], Banco_reg:BRE|Reg28[4],             ;
+;                             ;                                ; Banco_reg:BRE|Reg28[3], Banco_reg:BRE|Reg28[2], Banco_reg:BRE|Reg28[1],             ;
+;                             ;                                ; Banco_reg:BRE|Reg28[0], Banco_reg:BRE|Reg29[31], Banco_reg:BRE|Reg29[30],           ;
+;                             ;                                ; Banco_reg:BRE|Reg29[29], Banco_reg:BRE|Reg29[28], Banco_reg:BRE|Reg29[27],          ;
+;                             ;                                ; Banco_reg:BRE|Reg29[26], Banco_reg:BRE|Reg29[25], Banco_reg:BRE|Reg29[24],          ;
+;                             ;                                ; Banco_reg:BRE|Reg29[23], Banco_reg:BRE|Reg29[22], Banco_reg:BRE|Reg29[21],          ;
+;                             ;                                ; Banco_reg:BRE|Reg29[20], Banco_reg:BRE|Reg29[19], Banco_reg:BRE|Reg29[18],          ;
+;                             ;                                ; Banco_reg:BRE|Reg29[17], Banco_reg:BRE|Reg29[16], Banco_reg:BRE|Reg29[15],          ;
+;                             ;                                ; Banco_reg:BRE|Reg29[14], Banco_reg:BRE|Reg29[13], Banco_reg:BRE|Reg29[12],          ;
+;                             ;                                ; Banco_reg:BRE|Reg29[11], Banco_reg:BRE|Reg29[10], Banco_reg:BRE|Reg29[9],           ;
+;                             ;                                ; Banco_reg:BRE|Reg29[8], Banco_reg:BRE|Reg29[7], Banco_reg:BRE|Reg29[6],             ;
+;                             ;                                ; Banco_reg:BRE|Reg29[5], Banco_reg:BRE|Reg29[4], Banco_reg:BRE|Reg29[3],             ;
+;                             ;                                ; Banco_reg:BRE|Reg29[2], Banco_reg:BRE|Reg29[1], Banco_reg:BRE|Reg29[0],             ;
+;                             ;                                ; Banco_reg:BRE|Reg30[31], Banco_reg:BRE|Reg30[30], Banco_reg:BRE|Reg30[29],          ;
+;                             ;                                ; Banco_reg:BRE|Reg30[28], Banco_reg:BRE|Reg30[27], Banco_reg:BRE|Reg30[26],          ;
+;                             ;                                ; Banco_reg:BRE|Reg30[25], Banco_reg:BRE|Reg30[24], Banco_reg:BRE|Reg30[23],          ;
+;                             ;                                ; Banco_reg:BRE|Reg30[22], Banco_reg:BRE|Reg30[21], Banco_reg:BRE|Reg30[20],          ;
+;                             ;                                ; Banco_reg:BRE|Reg30[19], Banco_reg:BRE|Reg30[18], Banco_reg:BRE|Reg30[17],          ;
+;                             ;                                ; Banco_reg:BRE|Reg30[16], Banco_reg:BRE|Reg30[15], Banco_reg:BRE|Reg30[14],          ;
+;                             ;                                ; Banco_reg:BRE|Reg30[13], Banco_reg:BRE|Reg30[12], Banco_reg:BRE|Reg30[11],          ;
+;                             ;                                ; Banco_reg:BRE|Reg30[10], Banco_reg:BRE|Reg30[9], Banco_reg:BRE|Reg30[8],            ;
+;                             ;                                ; Banco_reg:BRE|Reg30[7], Banco_reg:BRE|Reg30[6], Banco_reg:BRE|Reg30[5],             ;
+;                             ;                                ; Banco_reg:BRE|Reg30[4], Banco_reg:BRE|Reg30[3], Banco_reg:BRE|Reg30[2],             ;
+;                             ;                                ; Banco_reg:BRE|Reg30[1], Banco_reg:BRE|Reg30[0], Banco_reg:BRE|Reg31[31],            ;
+;                             ;                                ; Banco_reg:BRE|Reg31[30], Banco_reg:BRE|Reg31[29], Banco_reg:BRE|Reg31[28],          ;
+;                             ;                                ; Banco_reg:BRE|Reg31[27], Banco_reg:BRE|Reg31[26], Banco_reg:BRE|Reg31[25],          ;
+;                             ;                                ; Banco_reg:BRE|Reg31[24], Banco_reg:BRE|Reg31[23], Banco_reg:BRE|Reg31[22],          ;
+;                             ;                                ; Banco_reg:BRE|Reg31[21], Banco_reg:BRE|Reg31[20], Banco_reg:BRE|Reg31[19],          ;
+;                             ;                                ; Banco_reg:BRE|Reg31[18], Banco_reg:BRE|Reg31[17], Banco_reg:BRE|Reg31[16],          ;
+;                             ;                                ; Banco_reg:BRE|Reg31[15], Banco_reg:BRE|Reg31[14], Banco_reg:BRE|Reg31[13],          ;
+;                             ;                                ; Banco_reg:BRE|Reg31[12], Banco_reg:BRE|Reg31[11], Banco_reg:BRE|Reg31[10],          ;
+;                             ;                                ; Banco_reg:BRE|Reg31[9], Banco_reg:BRE|Reg31[8], Banco_reg:BRE|Reg31[7],             ;
+;                             ;                                ; Banco_reg:BRE|Reg31[6], Banco_reg:BRE|Reg31[5], Banco_reg:BRE|Reg31[4],             ;
+;                             ;                                ; Banco_reg:BRE|Reg31[3], Banco_reg:BRE|Reg31[2], Banco_reg:BRE|Reg31[1],             ;
+;                             ;                                ; Banco_reg:BRE|Reg31[0]                                                              ;
+; Control:control|AluOutWrite ; Stuck at GND                   ; Registrador:AluOutR|Saida[31], Registrador:AluOutR|Saida[30],                       ;
+;                             ; due to stuck port data_in      ; Registrador:AluOutR|Saida[29], Registrador:AluOutR|Saida[28],                       ;
+;                             ;                                ; Registrador:AluOutR|Saida[27], Registrador:AluOutR|Saida[26],                       ;
+;                             ;                                ; Registrador:AluOutR|Saida[25], Registrador:AluOutR|Saida[24],                       ;
+;                             ;                                ; Registrador:AluOutR|Saida[23], Registrador:AluOutR|Saida[22],                       ;
+;                             ;                                ; Registrador:AluOutR|Saida[21], Registrador:AluOutR|Saida[20],                       ;
+;                             ;                                ; Registrador:AluOutR|Saida[19], Registrador:AluOutR|Saida[18],                       ;
+;                             ;                                ; Registrador:AluOutR|Saida[17], Registrador:AluOutR|Saida[16],                       ;
+;                             ;                                ; Registrador:AluOutR|Saida[15], Registrador:AluOutR|Saida[14],                       ;
+;                             ;                                ; Registrador:AluOutR|Saida[13], Registrador:AluOutR|Saida[12],                       ;
+;                             ;                                ; Registrador:AluOutR|Saida[11], Registrador:AluOutR|Saida[10],                       ;
+;                             ;                                ; Registrador:AluOutR|Saida[9], Registrador:AluOutR|Saida[8],                         ;
+;                             ;                                ; Registrador:AluOutR|Saida[7], Registrador:AluOutR|Saida[6],                         ;
+;                             ;                                ; Registrador:AluOutR|Saida[5], Registrador:AluOutR|Saida[4],                         ;
+;                             ;                                ; Registrador:AluOutR|Saida[3], Registrador:AluOutR|Saida[2],                         ;
+;                             ;                                ; Registrador:AluOutR|Saida[1], Registrador:AluOutR|Saida[0]                          ;
+; Control:control|RegDst      ; Stuck at GND                   ; Instr_Reg:IR|Instr15_0[15], Instr_Reg:IR|Instr15_0[14], Instr_Reg:IR|Instr15_0[13], ;
+;                             ; due to stuck port data_in      ; Instr_Reg:IR|Instr15_0[12], Instr_Reg:IR|Instr15_0[11]                              ;
+; Control:control|AluSrcA     ; Stuck at GND                   ; Registrador:PCR|Saida[0], Registrador:PCR|Saida[1]                                  ;
+;                             ; due to stuck port data_in      ;                                                                                     ;
+; Registrador:B|Saida[27]     ; Stuck at GND                   ; Registrador:RMDR|Saida[27]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[26]     ; Stuck at GND                   ; Registrador:RMDR|Saida[26]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[25]     ; Stuck at GND                   ; Registrador:RMDR|Saida[25]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[24]     ; Stuck at GND                   ; Registrador:RMDR|Saida[24]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[23]     ; Stuck at GND                   ; Registrador:RMDR|Saida[23]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[22]     ; Stuck at GND                   ; Registrador:RMDR|Saida[22]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[21]     ; Stuck at GND                   ; Registrador:RMDR|Saida[21]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[20]     ; Stuck at GND                   ; Registrador:RMDR|Saida[20]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[19]     ; Stuck at GND                   ; Registrador:RMDR|Saida[19]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[18]     ; Stuck at GND                   ; Registrador:RMDR|Saida[18]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[17]     ; Stuck at GND                   ; Registrador:RMDR|Saida[17]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[16]     ; Stuck at GND                   ; Registrador:RMDR|Saida[16]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[15]     ; Stuck at GND                   ; Registrador:RMDR|Saida[15]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[14]     ; Stuck at GND                   ; Registrador:RMDR|Saida[14]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[13]     ; Stuck at GND                   ; Registrador:RMDR|Saida[13]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[12]     ; Stuck at GND                   ; Registrador:RMDR|Saida[12]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[11]     ; Stuck at GND                   ; Registrador:RMDR|Saida[11]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[10]     ; Stuck at GND                   ; Registrador:RMDR|Saida[10]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[9]      ; Stuck at GND                   ; Registrador:RMDR|Saida[9]                                                           ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[8]      ; Stuck at GND                   ; Registrador:RMDR|Saida[8]                                                           ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[7]      ; Stuck at GND                   ; Registrador:RMDR|Saida[7]                                                           ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[6]      ; Stuck at GND                   ; Registrador:RMDR|Saida[6]                                                           ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[5]      ; Stuck at GND                   ; Registrador:RMDR|Saida[5]                                                           ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[4]      ; Stuck at GND                   ; Registrador:RMDR|Saida[4]                                                           ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[3]      ; Stuck at GND                   ; Registrador:RMDR|Saida[3]                                                           ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[2]      ; Stuck at GND                   ; Registrador:RMDR|Saida[2]                                                           ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[1]      ; Stuck at GND                   ; Registrador:RMDR|Saida[1]                                                           ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[0]      ; Stuck at GND                   ; Registrador:RMDR|Saida[0]                                                           ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[31]     ; Stuck at GND                   ; Registrador:RMDR|Saida[31]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[30]     ; Stuck at GND                   ; Registrador:RMDR|Saida[30]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[29]     ; Stuck at GND                   ; Registrador:RMDR|Saida[29]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Registrador:B|Saida[28]     ; Stuck at GND                   ; Registrador:RMDR|Saida[28]                                                          ;
+;                             ; due to stuck port clock_enable ;                                                                                     ;
+; Control:control|st.AND      ; Stuck at GND                   ; Control:control|State[4]                                                            ;
+;                             ; due to stuck port data_in      ;                                                                                     ;
++-----------------------------+--------------------------------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 55    ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 41    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 41    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------+
+; 64:1               ; 2 bits    ; 84 LEs        ; 16 LEs               ; 68 LEs                 ; No         ; |CPU|Control:control|Selector7 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Source assignments for Memoria:MEM|LPM_RAM_DQ:MEM|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated ;
++---------------------------------+--------------------+------+-----------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                  ;
++---------------------------------+--------------------+------+-----------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                   ;
++---------------------------------+--------------------+------+-----------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for Memoria:MEM|LPM_RAM_DQ:MEM_plus_One|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated ;
++---------------------------------+--------------------+------+--------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                           ;
++---------------------------------+--------------------+------+--------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                            ;
++---------------------------------+--------------------+------+--------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for Memoria:MEM|LPM_RAM_DQ:MEM_plus_Two|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated ;
++---------------------------------+--------------------+------+--------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                           ;
++---------------------------------+--------------------+------+--------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                            ;
++---------------------------------+--------------------+------+--------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for Memoria:MEM|LPM_RAM_DQ:MEM_plus_Three|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated ;
++---------------------------------+--------------------+------+----------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                             ;
++---------------------------------+--------------------+------+----------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                              ;
++---------------------------------+--------------------+------+----------------------------------------------------------------+
+
+
++--------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Control:control ;
++----------------+--------+------------------------------------+
+; Parameter Name ; Value  ; Type                               ;
++----------------+--------+------------------------------------+
+; RESET          ; 0      ; Signed Integer                     ;
+; INSTR_FETCH    ; 1      ; Signed Integer                     ;
+; IDLE           ; 2      ; Signed Integer                     ;
+; INSTR_DECODE   ; 3      ; Signed Integer                     ;
+; PC_WRT         ; 4      ; Signed Integer                     ;
+; STOP_PC        ; 5      ; Signed Integer                     ;
+; MEM_WRITE      ; 6      ; Signed Integer                     ;
+; IDLE_MEMORY    ; 7      ; Signed Integer                     ;
+; OP_NFOUND      ; 8      ; Signed Integer                     ;
+; RTYPE          ; 9      ; Signed Integer                     ;
+; BEQ            ; 10     ; Signed Integer                     ;
+; BNE            ; 11     ; Signed Integer                     ;
+; LW             ; 12     ; Signed Integer                     ;
+; SW             ; 13     ; Signed Integer                     ;
+; LUI            ; 14     ; Signed Integer                     ;
+; J              ; 15     ; Signed Integer                     ;
+; ADD            ; 16     ; Signed Integer                     ;
+; AND            ; 17     ; Signed Integer                     ;
+; SUB            ; 18     ; Signed Integer                     ;
+; XOR            ; 19     ; Signed Integer                     ;
+; BREAK          ; 20     ; Signed Integer                     ;
+; NOP            ; 21     ; Signed Integer                     ;
+; OP_R           ; 000000 ; Unsigned Binary                    ;
+; OP_BEQ         ; 000100 ; Unsigned Binary                    ;
+; OP_BNE         ; 000101 ; Unsigned Binary                    ;
+; OP_LW          ; 100011 ; Unsigned Binary                    ;
+; OP_SW          ; 101011 ; Unsigned Binary                    ;
+; OP_LUI         ; 001111 ; Unsigned Binary                    ;
+; OP_J           ; 000010 ; Unsigned Binary                    ;
++----------------+--------+------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Memoria:MEM|LPM_RAM_DQ:MEM ;
++------------------------+----------------+-------------------------------+
+; Parameter Name         ; Value          ; Type                          ;
++------------------------+----------------+-------------------------------+
+; LPM_WIDTH              ; 8              ; Signed Integer                ;
+; LPM_WIDTHAD            ; 8              ; Signed Integer                ;
+; LPM_NUMWORDS           ; 0              ; Signed Integer                ;
+; LPM_INDATA             ; REGISTERED     ; Untyped                       ;
+; LPM_ADDRESS_CONTROL    ; REGISTERED     ; Untyped                       ;
+; LPM_OUTDATA            ; REGISTERED     ; Untyped                       ;
+; LPM_FILE               ; instrucoes.mif ; Untyped                       ;
+; USE_EAB                ; ON             ; Untyped                       ;
+; DEVICE_FAMILY          ; Cyclone II     ; Untyped                       ;
+; CBXI_PARAMETER         ; NOTHING        ; Untyped                       ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                    ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                  ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                  ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                ;
++------------------------+----------------+-------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Memoria:MEM|LPM_RAM_DQ:MEM_plus_One ;
++------------------------+----------------+----------------------------------------+
+; Parameter Name         ; Value          ; Type                                   ;
++------------------------+----------------+----------------------------------------+
+; LPM_WIDTH              ; 8              ; Signed Integer                         ;
+; LPM_WIDTHAD            ; 8              ; Signed Integer                         ;
+; LPM_NUMWORDS           ; 0              ; Signed Integer                         ;
+; LPM_INDATA             ; REGISTERED     ; Untyped                                ;
+; LPM_ADDRESS_CONTROL    ; REGISTERED     ; Untyped                                ;
+; LPM_OUTDATA            ; REGISTERED     ; Untyped                                ;
+; LPM_FILE               ; instrucoes.mif ; Untyped                                ;
+; USE_EAB                ; ON             ; Untyped                                ;
+; DEVICE_FAMILY          ; Cyclone II     ; Untyped                                ;
+; CBXI_PARAMETER         ; NOTHING        ; Untyped                                ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                             ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                           ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                           ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                         ;
++------------------------+----------------+----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Memoria:MEM|LPM_RAM_DQ:MEM_plus_Two ;
++------------------------+----------------+----------------------------------------+
+; Parameter Name         ; Value          ; Type                                   ;
++------------------------+----------------+----------------------------------------+
+; LPM_WIDTH              ; 8              ; Signed Integer                         ;
+; LPM_WIDTHAD            ; 8              ; Signed Integer                         ;
+; LPM_NUMWORDS           ; 0              ; Signed Integer                         ;
+; LPM_INDATA             ; REGISTERED     ; Untyped                                ;
+; LPM_ADDRESS_CONTROL    ; REGISTERED     ; Untyped                                ;
+; LPM_OUTDATA            ; REGISTERED     ; Untyped                                ;
+; LPM_FILE               ; instrucoes.mif ; Untyped                                ;
+; USE_EAB                ; ON             ; Untyped                                ;
+; DEVICE_FAMILY          ; Cyclone II     ; Untyped                                ;
+; CBXI_PARAMETER         ; NOTHING        ; Untyped                                ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                             ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                           ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                           ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                         ;
++------------------------+----------------+----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Memoria:MEM|LPM_RAM_DQ:MEM_plus_Three ;
++------------------------+----------------+------------------------------------------+
+; Parameter Name         ; Value          ; Type                                     ;
++------------------------+----------------+------------------------------------------+
+; LPM_WIDTH              ; 8              ; Signed Integer                           ;
+; LPM_WIDTHAD            ; 8              ; Signed Integer                           ;
+; LPM_NUMWORDS           ; 0              ; Signed Integer                           ;
+; LPM_INDATA             ; REGISTERED     ; Untyped                                  ;
+; LPM_ADDRESS_CONTROL    ; REGISTERED     ; Untyped                                  ;
+; LPM_OUTDATA            ; REGISTERED     ; Untyped                                  ;
+; LPM_FILE               ; instrucoes.mif ; Untyped                                  ;
+; USE_EAB                ; ON             ; Untyped                                  ;
+; DEVICE_FAMILY          ; Cyclone II     ; Untyped                                  ;
+; CBXI_PARAMETER         ; NOTHING        ; Untyped                                  ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                               ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                             ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                             ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                           ;
++------------------------+----------------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------+
+; Port Connectivity Checks: "Ula32:ALU"                 ;
++----------+--------+----------+------------------------+
+; Port     ; Type   ; Severity ; Details                ;
++----------+--------+----------+------------------------+
+; overflow ; Output ; Info     ; Explicitly unconnected ;
+; negativo ; Output ; Info     ; Explicitly unconnected ;
+; z        ; Output ; Info     ; Explicitly unconnected ;
+; igual    ; Output ; Info     ; Explicitly unconnected ;
+; maior    ; Output ; Info     ; Explicitly unconnected ;
+; menor    ; Output ; Info     ; Explicitly unconnected ;
++----------+--------+----------+------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Banco_reg:BRE"                                                                                                     ;
++----------+-------+------------------+---------------------------------------------------------------------------------------------------------+
+; Port     ; Type  ; Severity         ; Details                                                                                                 ;
++----------+-------+------------------+---------------------------------------------------------------------------------------------------------+
+; writereg ; Input ; Critical Warning ; Can't connect array with 32 elements in array dimension 1 to port with 5 elements in the same dimension ;
++----------+-------+------------------+---------------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Instr_Reg:IR"                                                                                   ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port             ; Type   ; Severity ; Details                                                                             ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; instr15_0[10..6] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; instr15_0[4..0]  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Registrador:A"                                                                       ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; saida ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------+
+; Port Connectivity Checks: "PCSourceMux:pcmux"    ;
++------+-------+----------+------------------------+
+; Port ; Type  ; Severity ; Details                ;
++------+-------+----------+------------------------+
+; Jump ; Input ; Info     ; Explicitly unconnected ;
++------+-------+----------+------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "AluBMux:rbmux"                                                                                                                              ;
++-------+-------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+; Port  ; Type  ; Severity ; Details                                                                                                                                     ;
++-------+-------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+; B     ; Input ; Warning  ; Input port expression (1 bits) is smaller than the input port (32 bits) it drives.  Extra input bit(s) "B[31..1]" will be connected to GND. ;
+; SignE ; Input ; Info     ; Explicitly unconnected                                                                                                                      ;
+; SL2   ; Input ; Info     ; Explicitly unconnected                                                                                                                      ;
++-------+-------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "AluAMux:ramux"                                                                                                                             ;
++------+-------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                                                                                                     ;
++------+-------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+; A    ; Input ; Warning  ; Input port expression (1 bits) is smaller than the input port (32 bits) it drives.  Extra input bit(s) "A[31..1]" will be connected to GND. ;
++------+-------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "RegDstMux:rdmux"                                                                                                                                                                 ;
++---------------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port          ; Type   ; Severity ; Details                                                                                                                                                                 ;
++---------------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; wrtRegMux_out ; Output ; Warning  ; Output or bidir port (5 bits) is smaller than the port expression (32 bits) it drives.  The 27 most-significant bit(s) in the port expression will be connected to GND. ;
++---------------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Control:control"                                                                                                                                ;
++--------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                                                       ;
++--------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+; Funct  ; Input  ; Warning  ; Input port expression (1 bits) is smaller than the input port (6 bits) it drives.  Extra input bit(s) "Funct[5..1]" will be connected to GND. ;
+; AWrite ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                           ;
+; BWrite ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                           ;
++--------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Thu Apr 12 02:34:43 2018
+    Info: Processing started: Sun Apr 15 05:10:50 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off hw -c hw
 Info: Found 2 design units, including 1 entities, in source file /users/bah/desktop/componentes do projeto/banco_reg.vhd
     Info: Found design unit 1: Banco_reg-behavioral_arch
@@ -163,27 +1111,451 @@ Info: Found 1 design units, including 1 entities, in source file control.sv
     Info: Found entity 1: Control
 Info: Found 1 design units, including 1 entities, in source file cpu.sv
     Info: Found entity 1: CPU
-Error (10161): Verilog HDL error at Control.sv(139): object "ISNTR_DECODE" is not declared File: C:/Users/bah/Desktop/HW/Control.sv Line: 139
-Error (10161): Verilog HDL error at Control.sv(153): object "state" is not declared File: C:/Users/bah/Desktop/HW/Control.sv Line: 153
-Error (10161): Verilog HDL error at Control.sv(159): object "state" is not declared File: C:/Users/bah/Desktop/HW/Control.sv Line: 159
-Error (10161): Verilog HDL error at Control.sv(159): object "ADD" is not declared File: C:/Users/bah/Desktop/HW/Control.sv Line: 159
-Error (10161): Verilog HDL error at Control.sv(162): object "state" is not declared File: C:/Users/bah/Desktop/HW/Control.sv Line: 162
-Error (10161): Verilog HDL error at Control.sv(162): object "AND" is not declared File: C:/Users/bah/Desktop/HW/Control.sv Line: 162
-Error (10161): Verilog HDL error at Control.sv(165): object "state" is not declared File: C:/Users/bah/Desktop/HW/Control.sv Line: 165
-Error (10161): Verilog HDL error at Control.sv(165): object "SUB" is not declared File: C:/Users/bah/Desktop/HW/Control.sv Line: 165
-Error (10161): Verilog HDL error at Control.sv(168): object "state" is not declared File: C:/Users/bah/Desktop/HW/Control.sv Line: 168
-Error (10161): Verilog HDL error at Control.sv(168): object "XOR" is not declared File: C:/Users/bah/Desktop/HW/Control.sv Line: 168
-Error (10161): Verilog HDL error at Control.sv(171): object "state" is not declared File: C:/Users/bah/Desktop/HW/Control.sv Line: 171
-Error (10161): Verilog HDL error at Control.sv(171): object "BREAK" is not declared File: C:/Users/bah/Desktop/HW/Control.sv Line: 171
-Error (10161): Verilog HDL error at Control.sv(174): object "state" is not declared File: C:/Users/bah/Desktop/HW/Control.sv Line: 174
-Error (10161): Verilog HDL error at Control.sv(174): object "NOP" is not declared File: C:/Users/bah/Desktop/HW/Control.sv Line: 174
-Error (10161): Verilog HDL error at Control.sv(180): object "state" is not declared File: C:/Users/bah/Desktop/HW/Control.sv Line: 180
+Info: Found 1 design units, including 1 entities, in source file iordmux.sv
+    Info: Found entity 1: IorDMux
+Info: Found 1 design units, including 1 entities, in source file regdstmux.sv
+    Info: Found entity 1: RegDstMux
+Info: Found 1 design units, including 1 entities, in source file mdrmux.sv
+    Info: Found entity 1: MDRMux
+Info: Found 1 design units, including 1 entities, in source file aluamux.sv
+    Info: Found entity 1: AluAMux
+Info: Found 1 design units, including 1 entities, in source file alubmux.sv
+    Info: Found entity 1: AluBMux
+Info: Found 1 design units, including 1 entities, in source file pcsourcemux.sv
+    Info: Found entity 1: PCSourceMux
+Warning (10236): Verilog HDL Implicit Net warning at CPU.sv(74): created implicit net for "AReg_out"
+Warning (10236): Verilog HDL Implicit Net warning at CPU.sv(79): created implicit net for "BReg_out"
+Warning (10236): Verilog HDL Implicit Net warning at CPU.sv(98): created implicit net for "AWrite"
+Warning (10236): Verilog HDL Implicit Net warning at CPU.sv(104): created implicit net for "BWrite"
+Info: Elaborating entity "CPU" for the top level hierarchy
+Warning (10034): Output port "WriteDataMem" at CPU.sv(23) has no driver
+Warning (10034): Output port "Reg_Desloc" at CPU.sv(23) has no driver
+Warning (10034): Output port "mul_Module" at CPU.sv(23) has no driver
+Warning (10034): Output port "wr" at CPU.sv(24) has no driver
+Warning (10034): Output port "RegWrite" at CPU.sv(24) has no driver
+Warning (10034): Output port "IRWrite" at CPU.sv(24) has no driver
+Info: Elaborating entity "Control" for hierarchy "Control:control"
+Info (10264): Verilog HDL Case Statement information at Control.sv(57): all case item expressions in this case statement are onehot
+Info: Elaborating entity "IorDMux" for hierarchy "IorDMux:iordmux"
+Warning (10235): Verilog HDL Always Construct warning at IorDMux.sv(10): variable "PC" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at IorDMux.sv(11): variable "AluOut" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Info: Elaborating entity "RegDstMux" for hierarchy "RegDstMux:rdmux"
+Warning (10235): Verilog HDL Always Construct warning at RegDstMux.sv(8): variable "I20_16" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at RegDstMux.sv(9): variable "I15_11" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Info: Elaborating entity "MDRMux" for hierarchy "MDRMux:mdrmux"
+Warning (10235): Verilog HDL Always Construct warning at MDRMux.sv(8): variable "AluOut" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at MDRMux.sv(9): variable "MDR" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Info: Elaborating entity "AluAMux" for hierarchy "AluAMux:ramux"
+Warning (10235): Verilog HDL Always Construct warning at AluAMux.sv(8): variable "PC" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at AluAMux.sv(9): variable "A" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Info: Elaborating entity "AluBMux" for hierarchy "AluBMux:rbmux"
+Warning (10235): Verilog HDL Always Construct warning at AluBMux.sv(9): variable "B" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at AluBMux.sv(11): variable "SignE" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at AluBMux.sv(12): variable "SL2" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Info: Elaborating entity "PCSourceMux" for hierarchy "PCSourceMux:pcmux"
+Warning (10235): Verilog HDL Always Construct warning at PCSourceMux.sv(8): variable "AluS" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at PCSourceMux.sv(9): variable "AluOut" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at PCSourceMux.sv(10): variable "Jump" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at PCSourceMux.sv(11): variable "EPC" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Info: Elaborating entity "Registrador" for hierarchy "Registrador:A"
+Info: Elaborating entity "Memoria" for hierarchy "Memoria:MEM"
+Info: Elaborating entity "LPM_RAM_DQ" for hierarchy "Memoria:MEM|LPM_RAM_DQ:MEM"
+Info: Elaborated megafunction instantiation "Memoria:MEM|LPM_RAM_DQ:MEM"
+Info: Instantiated megafunction "Memoria:MEM|LPM_RAM_DQ:MEM" with the following parameter:
+    Info: Parameter "LPM_WIDTH" = "8"
+    Info: Parameter "LPM_WIDTHAD" = "8"
+    Info: Parameter "LPM_NUMWORDS" = "0"
+    Info: Parameter "LPM_INDATA" = "REGISTERED"
+    Info: Parameter "LPM_ADDRESS_CONTROL" = "REGISTERED"
+    Info: Parameter "LPM_OUTDATA" = "REGISTERED"
+    Info: Parameter "LPM_FILE" = "instrucoes.mif"
+    Info: Parameter "LPM_TYPE" = "LPM_RAM_DQ"
+    Info: Parameter "USE_EAB" = "ON"
+    Info: Parameter "INTENDED_DEVICE_FAMILY" = "UNUSED"
+    Info: Parameter "LPM_HINT" = "UNUSED"
+Info: Elaborating entity "altram" for hierarchy "Memoria:MEM|LPM_RAM_DQ:MEM|altram:sram"
+Warning: Assertion warning: altram does not support Cyclone II device family -- attempting best-case memory conversions, but power-up states and read during write behavior will be different for Cyclone II devices
+Info: Elaborated megafunction instantiation "Memoria:MEM|LPM_RAM_DQ:MEM|altram:sram", which is child of megafunction instantiation "Memoria:MEM|LPM_RAM_DQ:MEM"
+Info: Elaborating entity "altsyncram" for hierarchy "Memoria:MEM|LPM_RAM_DQ:MEM|altram:sram|altsyncram:ram_block"
+Info: Elaborated megafunction instantiation "Memoria:MEM|LPM_RAM_DQ:MEM|altram:sram|altsyncram:ram_block", which is child of megafunction instantiation "Memoria:MEM|LPM_RAM_DQ:MEM"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_e1a1.tdf
+    Info: Found entity 1: altsyncram_e1a1
+Info: Elaborating entity "altsyncram_e1a1" for hierarchy "Memoria:MEM|LPM_RAM_DQ:MEM|altram:sram|altsyncram:ram_block|altsyncram_e1a1:auto_generated"
+Info: Elaborating entity "Instr_Reg" for hierarchy "Instr_Reg:IR"
+Info: Elaborating entity "Banco_reg" for hierarchy "Banco_reg:BRE"
+Info: Elaborating entity "Ula32" for hierarchy "Ula32:ALU"
+Warning: Net is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[31]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[30]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[29]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[28]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[27]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[26]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[25]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[24]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[23]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[22]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[21]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[20]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[19]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[18]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[17]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[16]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[15]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[14]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[13]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[12]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[11]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[10]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[9]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[8]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[7]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[6]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[5]" is missing source, defaulting to GND
+Warning: Net is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[31]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[30]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[29]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[28]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[27]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[26]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[25]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[24]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[23]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[22]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[21]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[20]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[19]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[18]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[17]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[16]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[15]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[14]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[13]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[12]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[11]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[10]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[9]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[8]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[7]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[6]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[5]" is missing source, defaulting to GND
+Warning: Net is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[31]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[30]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[29]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[28]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[27]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[26]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[25]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[24]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[23]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[22]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[21]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[20]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[19]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[18]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[17]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[16]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[15]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[14]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[13]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[12]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[11]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[10]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[9]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[8]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[7]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[6]" is missing source, defaulting to GND
+    Warning (12110): Net "WriteRegister[5]" is missing source, defaulting to GND
+Warning: 5 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning: Output pins are stuck at VCC or GND
+    Warning (13410): Pin "Address[0]" is stuck at GND
+    Warning (13410): Pin "Address[1]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[0]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[1]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[2]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[3]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[4]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[5]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[6]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[7]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[8]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[9]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[10]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[11]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[12]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[13]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[14]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[15]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[16]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[17]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[18]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[19]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[20]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[21]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[22]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[23]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[24]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[25]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[26]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[27]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[28]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[29]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[30]" is stuck at GND
+    Warning (13410): Pin "WriteDataMem[31]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[5]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[6]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[7]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[8]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[9]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[10]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[11]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[12]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[13]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[14]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[15]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[16]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[17]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[18]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[19]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[20]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[21]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[22]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[23]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[24]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[25]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[26]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[27]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[28]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[29]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[30]" is stuck at GND
+    Warning (13410): Pin "WriteRegister[31]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[0]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[1]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[2]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[3]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[4]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[5]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[6]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[7]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[8]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[9]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[10]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[11]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[12]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[13]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[14]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[15]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[16]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[17]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[18]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[19]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[20]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[21]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[22]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[23]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[24]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[25]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[26]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[27]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[28]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[29]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[30]" is stuck at GND
+    Warning (13410): Pin "WriteDataReg[31]" is stuck at GND
+    Warning (13410): Pin "MDR[0]" is stuck at GND
+    Warning (13410): Pin "MDR[1]" is stuck at GND
+    Warning (13410): Pin "MDR[2]" is stuck at GND
+    Warning (13410): Pin "MDR[3]" is stuck at GND
+    Warning (13410): Pin "MDR[4]" is stuck at GND
+    Warning (13410): Pin "MDR[5]" is stuck at GND
+    Warning (13410): Pin "MDR[6]" is stuck at GND
+    Warning (13410): Pin "MDR[7]" is stuck at GND
+    Warning (13410): Pin "MDR[8]" is stuck at GND
+    Warning (13410): Pin "MDR[9]" is stuck at GND
+    Warning (13410): Pin "MDR[10]" is stuck at GND
+    Warning (13410): Pin "MDR[11]" is stuck at GND
+    Warning (13410): Pin "MDR[12]" is stuck at GND
+    Warning (13410): Pin "MDR[13]" is stuck at GND
+    Warning (13410): Pin "MDR[14]" is stuck at GND
+    Warning (13410): Pin "MDR[15]" is stuck at GND
+    Warning (13410): Pin "MDR[16]" is stuck at GND
+    Warning (13410): Pin "MDR[17]" is stuck at GND
+    Warning (13410): Pin "MDR[18]" is stuck at GND
+    Warning (13410): Pin "MDR[19]" is stuck at GND
+    Warning (13410): Pin "MDR[20]" is stuck at GND
+    Warning (13410): Pin "MDR[21]" is stuck at GND
+    Warning (13410): Pin "MDR[22]" is stuck at GND
+    Warning (13410): Pin "MDR[23]" is stuck at GND
+    Warning (13410): Pin "MDR[24]" is stuck at GND
+    Warning (13410): Pin "MDR[25]" is stuck at GND
+    Warning (13410): Pin "MDR[26]" is stuck at GND
+    Warning (13410): Pin "MDR[27]" is stuck at GND
+    Warning (13410): Pin "MDR[28]" is stuck at GND
+    Warning (13410): Pin "MDR[29]" is stuck at GND
+    Warning (13410): Pin "MDR[30]" is stuck at GND
+    Warning (13410): Pin "MDR[31]" is stuck at GND
+    Warning (13410): Pin "Alu[0]" is stuck at GND
+    Warning (13410): Pin "Alu[1]" is stuck at GND
+    Warning (13410): Pin "AluOut[0]" is stuck at GND
+    Warning (13410): Pin "AluOut[1]" is stuck at GND
+    Warning (13410): Pin "AluOut[2]" is stuck at GND
+    Warning (13410): Pin "AluOut[3]" is stuck at GND
+    Warning (13410): Pin "AluOut[4]" is stuck at GND
+    Warning (13410): Pin "AluOut[5]" is stuck at GND
+    Warning (13410): Pin "AluOut[6]" is stuck at GND
+    Warning (13410): Pin "AluOut[7]" is stuck at GND
+    Warning (13410): Pin "AluOut[8]" is stuck at GND
+    Warning (13410): Pin "AluOut[9]" is stuck at GND
+    Warning (13410): Pin "AluOut[10]" is stuck at GND
+    Warning (13410): Pin "AluOut[11]" is stuck at GND
+    Warning (13410): Pin "AluOut[12]" is stuck at GND
+    Warning (13410): Pin "AluOut[13]" is stuck at GND
+    Warning (13410): Pin "AluOut[14]" is stuck at GND
+    Warning (13410): Pin "AluOut[15]" is stuck at GND
+    Warning (13410): Pin "AluOut[16]" is stuck at GND
+    Warning (13410): Pin "AluOut[17]" is stuck at GND
+    Warning (13410): Pin "AluOut[18]" is stuck at GND
+    Warning (13410): Pin "AluOut[19]" is stuck at GND
+    Warning (13410): Pin "AluOut[20]" is stuck at GND
+    Warning (13410): Pin "AluOut[21]" is stuck at GND
+    Warning (13410): Pin "AluOut[22]" is stuck at GND
+    Warning (13410): Pin "AluOut[23]" is stuck at GND
+    Warning (13410): Pin "AluOut[24]" is stuck at GND
+    Warning (13410): Pin "AluOut[25]" is stuck at GND
+    Warning (13410): Pin "AluOut[26]" is stuck at GND
+    Warning (13410): Pin "AluOut[27]" is stuck at GND
+    Warning (13410): Pin "AluOut[28]" is stuck at GND
+    Warning (13410): Pin "AluOut[29]" is stuck at GND
+    Warning (13410): Pin "AluOut[30]" is stuck at GND
+    Warning (13410): Pin "AluOut[31]" is stuck at GND
+    Warning (13410): Pin "PC[0]" is stuck at GND
+    Warning (13410): Pin "PC[1]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[0]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[1]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[2]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[3]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[4]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[5]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[6]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[7]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[8]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[9]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[10]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[11]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[12]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[13]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[14]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[15]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[16]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[17]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[18]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[19]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[20]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[21]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[22]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[23]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[24]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[25]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[26]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[27]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[28]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[29]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[30]" is stuck at GND
+    Warning (13410): Pin "Reg_Desloc[31]" is stuck at GND
+    Warning (13410): Pin "wr" is stuck at GND
+    Warning (13410): Pin "RegWrite" is stuck at GND
+    Warning (13410): Pin "IRWrite" is stuck at GND
+    Warning (13410): Pin "EPC[0]" is stuck at GND
+    Warning (13410): Pin "EPC[1]" is stuck at GND
+    Warning (13410): Pin "EPC[2]" is stuck at GND
+    Warning (13410): Pin "EPC[3]" is stuck at GND
+    Warning (13410): Pin "EPC[4]" is stuck at GND
+    Warning (13410): Pin "EPC[5]" is stuck at GND
+    Warning (13410): Pin "EPC[6]" is stuck at GND
+    Warning (13410): Pin "EPC[7]" is stuck at GND
+    Warning (13410): Pin "EPC[8]" is stuck at GND
+    Warning (13410): Pin "EPC[9]" is stuck at GND
+    Warning (13410): Pin "EPC[10]" is stuck at GND
+    Warning (13410): Pin "EPC[11]" is stuck at GND
+    Warning (13410): Pin "EPC[12]" is stuck at GND
+    Warning (13410): Pin "EPC[13]" is stuck at GND
+    Warning (13410): Pin "EPC[14]" is stuck at GND
+    Warning (13410): Pin "EPC[15]" is stuck at GND
+    Warning (13410): Pin "EPC[16]" is stuck at GND
+    Warning (13410): Pin "EPC[17]" is stuck at GND
+    Warning (13410): Pin "EPC[18]" is stuck at GND
+    Warning (13410): Pin "EPC[19]" is stuck at GND
+    Warning (13410): Pin "EPC[20]" is stuck at GND
+    Warning (13410): Pin "EPC[21]" is stuck at GND
+    Warning (13410): Pin "EPC[22]" is stuck at GND
+    Warning (13410): Pin "EPC[23]" is stuck at GND
+    Warning (13410): Pin "EPC[24]" is stuck at GND
+    Warning (13410): Pin "EPC[25]" is stuck at GND
+    Warning (13410): Pin "EPC[26]" is stuck at GND
+    Warning (13410): Pin "EPC[27]" is stuck at GND
+    Warning (13410): Pin "EPC[28]" is stuck at GND
+    Warning (13410): Pin "EPC[29]" is stuck at GND
+    Warning (13410): Pin "EPC[30]" is stuck at GND
+    Warning (13410): Pin "EPC[31]" is stuck at GND
+    Warning (13410): Pin "mul_Module[0]" is stuck at GND
+    Warning (13410): Pin "mul_Module[1]" is stuck at GND
+    Warning (13410): Pin "mul_Module[2]" is stuck at GND
+    Warning (13410): Pin "mul_Module[3]" is stuck at GND
+    Warning (13410): Pin "mul_Module[4]" is stuck at GND
+    Warning (13410): Pin "mul_Module[5]" is stuck at GND
+    Warning (13410): Pin "mul_Module[6]" is stuck at GND
+    Warning (13410): Pin "mul_Module[7]" is stuck at GND
+    Warning (13410): Pin "mul_Module[8]" is stuck at GND
+    Warning (13410): Pin "mul_Module[9]" is stuck at GND
+    Warning (13410): Pin "mul_Module[10]" is stuck at GND
+    Warning (13410): Pin "mul_Module[11]" is stuck at GND
+    Warning (13410): Pin "mul_Module[12]" is stuck at GND
+    Warning (13410): Pin "mul_Module[13]" is stuck at GND
+    Warning (13410): Pin "mul_Module[14]" is stuck at GND
+    Warning (13410): Pin "mul_Module[15]" is stuck at GND
+    Warning (13410): Pin "mul_Module[16]" is stuck at GND
+    Warning (13410): Pin "mul_Module[17]" is stuck at GND
+    Warning (13410): Pin "mul_Module[18]" is stuck at GND
+    Warning (13410): Pin "mul_Module[19]" is stuck at GND
+    Warning (13410): Pin "mul_Module[20]" is stuck at GND
+    Warning (13410): Pin "mul_Module[21]" is stuck at GND
+    Warning (13410): Pin "mul_Module[22]" is stuck at GND
+    Warning (13410): Pin "mul_Module[23]" is stuck at GND
+    Warning (13410): Pin "mul_Module[24]" is stuck at GND
+    Warning (13410): Pin "mul_Module[25]" is stuck at GND
+    Warning (13410): Pin "mul_Module[26]" is stuck at GND
+    Warning (13410): Pin "mul_Module[27]" is stuck at GND
+    Warning (13410): Pin "mul_Module[28]" is stuck at GND
+    Warning (13410): Pin "mul_Module[29]" is stuck at GND
+    Warning (13410): Pin "mul_Module[30]" is stuck at GND
+    Warning (13410): Pin "mul_Module[31]" is stuck at GND
+    Warning (13410): Pin "Estado[4]" is stuck at GND
+    Warning (13410): Pin "Estado[5]" is stuck at GND
+Info: 12 registers lost all their fanouts during netlist optimizations. The first 12 are displayed below.
+    Info: Register "Instr_Reg:IR|Instr15_0[5]" lost all its fanouts during netlist optimizations.
+    Info: Register "Instr_Reg:IR|Instr15_0[15]" lost all its fanouts during netlist optimizations.
+    Info: Register "Instr_Reg:IR|Instr15_0[14]" lost all its fanouts during netlist optimizations.
+    Info: Register "Instr_Reg:IR|Instr15_0[13]" lost all its fanouts during netlist optimizations.
+    Info: Register "Instr_Reg:IR|Instr15_0[12]" lost all its fanouts during netlist optimizations.
+    Info: Register "Instr_Reg:IR|Instr15_0[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "Control:control|st~3" lost all its fanouts during netlist optimizations.
+    Info: Register "Control:control|st~4" lost all its fanouts during netlist optimizations.
+    Info: Register "Control:control|st~5" lost all its fanouts during netlist optimizations.
+    Info: Register "Control:control|st~6" lost all its fanouts during netlist optimizations.
+    Info: Register "Control:control|st~7" lost all its fanouts during netlist optimizations.
+    Info: Register "Control:control|st~8" lost all its fanouts during netlist optimizations.
 Info: Generated suppressed messages file C:/Users/bah/Desktop/HW/hw.map.smsg
-Error: Quartus II Analysis & Synthesis was unsuccessful. 15 errors, 0 warnings
-    Error: Peak virtual memory: 223 megabytes
-    Error: Processing ended: Thu Apr 12 02:34:47 2018
-    Error: Elapsed time: 00:00:04
-    Error: Total CPU time (on all processors): 00:00:01
+Info: Implemented 539 device resources after synthesis - the final resource count might be different
+    Info: Implemented 2 input pins
+    Info: Implemented 393 output pins
+    Info: Implemented 112 logic cells
+    Info: Implemented 32 RAM segments
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 374 warnings
+    Info: Peak virtual memory: 242 megabytes
+    Info: Processing ended: Sun Apr 15 05:10:55 2018
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:08
 
 
 +------------------------------------------+
